@@ -1,0 +1,58 @@
+{
+  "content": [
+    {
+      "id": "563f6b86-e379-3965-81eb-90471da4d688",
+      "name": "jenkins-test",
+      "type": {
+        "id": "com.vmw.blueprint",
+        "link": "/catalog/api/types/com.vmw.blueprint",
+        "name": "VMware Cloud Templates"
+      },
+      "projectIds": [
+        "9de81991-4063-43b8-9542-dbaff1e588f8"
+      ],
+      "createdAt": "2020-08-28T13:58:30.288680Z",
+      "createdBy": "prydin@somewhere.com",
+      "lastUpdatedAt": "2020-08-29T23:30:04.823882Z",
+      "lastUpdatedBy": "system-user",
+      "iconId": "1495b8d9-9428-30d6-9626-10ff9281645e",
+      "bulkRequestLimit": 1
+    }
+  ],
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "queryInfo": {
+      "customOptions": {},
+      "expand": [],
+      "select": [],
+      "properties": [],
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      }
+    },
+    "pageNumber": 0,
+    "pageSize": 200,
+    "unpaged": false,
+    "paged": true
+  },
+  "totalElements": 1,
+  "last": true,
+  "totalPages": 1,
+  "first": true,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "size": 200,
+  "number": 0,
+  "numberOfElements": 1,
+  "empty": false
+}

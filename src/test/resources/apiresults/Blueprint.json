@@ -1,0 +1,27 @@
+{
+  "id": "58bc8ef5-7100-4326-b4af-99e4db2ec4da",
+  "createdAt": "2020-07-17T15:19:49.692830Z",
+  "createdBy": "system-user",
+  "updatedAt": "2020-09-02T15:45:07.165775Z",
+  "updatedBy": "prydin@somewhere.com",
+  "orgId": "7c6b36ef-7829-46a8-9618-5b294f8c161e",
+  "projectId": "9de81991-4063-43b8-9542-dbaff1e588f8",
+  "projectName": "JenkinsTest",
+  "selfLink": "/blueprint/api/blueprints/58bc8ef5-7100-4326-b4af-99e4db2ec4da",
+  "name": "jenkins-test",
+  "status": "DRAFT",
+  "valid": true,
+  "validationMessages": [],
+  "totalVersions": 6,
+  "totalReleasedVersions": 2,
+  "requestScopeOrg": false,
+  "contentSourceId": "2e300eeb-e12d-4da5-a0f9-168b42e68dab",
+  "contentSourcePath": "blueprints/ubuntu-18/plain/blueprint.yaml",
+  "contentSourceType": "com.github",
+  "contentSourceSyncStatus": "FAILED",
+  "contentSourceSyncMessages": [
+    "Kept draft, version(s) not created",
+    "Version 3 already exists."
+  ],
+  "contentSourceSyncAt": "2020-07-17T17:09:35.632610Z"
+}

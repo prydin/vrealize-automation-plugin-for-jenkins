@@ -1,0 +1,143 @@
+{
+  "id": "17a6f622-2022-4482-bfb7-6fa889dabaa5",
+  "name": "JenkinsFromYaml-a82ab7bd-63ac-4c33-b6eb-8b9c2931e38d",
+  "orgId": "7c6b36ef-7829-46a8-9618-5b294f8c161e",
+  "catalogItemId": "563f6b86-e379-3965-81eb-90471da4d688",
+  "catalogItemVersion": "2",
+  "blueprintId": "58bc8ef5-7100-4326-b4af-99e4db2ec4da",
+  "blueprintVersion": "2",
+  "iconId": "1495b8d9-9428-30d6-9626-10ff9281645e",
+  "createdAt": "2020-09-11T20:36:29.029412Z",
+  "createdBy": "prydin@somewhere.com",
+  "lastUpdatedAt": "2020-09-11T20:39:40.994983Z",
+  "lastUpdatedBy": "tapestryservice",
+  "inputs": {
+    "user": "demouser",
+    "password": "((secret:v1:redacted))",
+    "username": "test",
+    "environment": "vSphere"
+  },
+  "projectId": "9de81991-4063-43b8-9542-dbaff1e588f8",
+  "resources": [
+    {
+      "id": "4bc139b4-afe3-4b38-b747-a6b1cd84cf0a",
+      "name": "UbuntuMachine",
+      "type": "Cloud.Machine",
+      "dependsOn": [
+        "Cloud_Network_1"
+      ],
+      "createdAt": "2020-09-11T20:36:37.060637Z",
+      "properties": {
+        "resourceId": "4bc139b4-afe3-4b38-b747-a6b1cd84cf0a",
+        "resourceDescLink": "/resources/compute-descriptions/582f11ea-ee3c-48aa-8249-8dbfbb7a9322",
+        "constraints": [
+          {
+            "tag": "env:vsphere"
+          }
+        ],
+        "provisionGB": "20",
+        "powerState": "ON",
+        "zone": "wfvsancluster / PAS_Resources",
+        "computeHostType": "ResourcePool",
+        "id": "/resources/compute/4bc139b4-afe3-4b38-b747-a6b1cd84cf0a",
+        "cpuCount": 2,
+        "image": "prydin-ubuntu-18-dhcp",
+        "totalMemoryMB": 4096,
+        "endpointType": "vsphere",
+        "resourceName": "prydin-004374",
+        "tags": [
+          {
+            "key": "cloud",
+            "value": "on-prem"
+          },
+          {
+            "key": "env",
+            "value": "vsphere"
+          }
+        ],
+        "flavor": "Medium",
+        "softwareName": "Ubuntu Linux (64-bit)",
+        "name": "UbuntuMachine",
+        "folderName": "",
+        "resourceLink": "/resources/compute/4bc139b4-afe3-4b38-b747-a6b1cd84cf0a",
+        "region": "wavefrontDC",
+        "cloudConfig": "(redacted)",
+        "storage": {
+          "disks": [
+            {
+              "name": "CD/DVD drive 1",
+              "type": "CDROM",
+              "encrypted": false,
+              "capacityGb": 0,
+              "persistent": false
+            },
+            {
+              "vm": "VirtualMachine:vm-53230",
+              "name": "boot-disk",
+              "type": "HDD",
+              "vcUuid": "71b3be9d-2301-4273-81e8-b118dc9cc92d",
+              "bootOrder": 1,
+              "encrypted": false,
+              "capacityGb": 20,
+              "persistent": false,
+              "independent": "false",
+              "provisionGB": "20",
+              "diskPlacementRef": "Datastore:datastore-53",
+              "provisioningType": "thin"
+            }
+          ]
+        },
+        "networks": [
+          {
+            "id": "/resources/network-interfaces/8ac5b0d5-7432-4a20-8255-82d2a6a31411",
+            "name": "Cloud_Network_1",
+            "address": "10.198.13.47",
+            "network": "/provisioning/resources/compute-networks/83221296-4b96-4931-839e-34e242ad8baf",
+            "assignment": "dynamic",
+            "deviceIndex": 0,
+            "mac_address": "00:50:56:99:2e:79",
+            "resourceName": "vmDPortGroup",
+            "ipv6Addresses": [
+              "fe80::250:56ff:fe99:2e79"
+            ]
+          }
+        ],
+        "providerId": "501904b2-5b40-fdc0-6c44-946e6c8eec7e",
+        "osType": "LINUX",
+        "resourcePool": "/resources/pools/1a6dbdc51d094075-7f703c5265a63d87",
+        "componentType": "Cloud.vSphere.Machine",
+        "address": "10.198.13.47",
+        "resourceGroupName": "vRA VMs",
+        "endpointId": "317ae62f-5d44-47a0-b178-a4e6155b512c",
+        "datastoreName": "vsanDatastore",
+        "primaryMAC": "00:50:56:99:2e:79",
+        "computeHostRef": "ResourcePool:resgroup-52693",
+        "flavorMappingName": "",
+        "account": "WF Lab",
+        "vcUuid": "71b3be9d-2301-4273-81e8-b118dc9cc92d"
+      },
+      "state": "OK"
+    },
+    {
+      "id": "83221296-4b96-4931-839e-34e242ad8baf",
+      "name": "Cloud_Network_1",
+      "type": "Cloud.Network",
+      "createdAt": "2020-09-11T20:36:31.066283Z",
+      "properties": {
+        "resourceId": "83221296-4b96-4931-839e-34e242ad8baf",
+        "resourceDescLink": "/provisioning/resources/compute-network-descriptions/3ee966e7-255d-45af-af21-cc043d7ce343",
+        "providerId": "0355d662-468a-4675-8241-90b07a8c3692",
+        "id": "/provisioning/resources/compute-networks/83221296-4b96-4931-839e-34e242ad8baf",
+        "networkType": "existing",
+        "endpointType": "vsphere",
+        "endpointId": "317ae62f-5d44-47a0-b178-a4e6155b512c",
+        "resourceName": "vmDPortGroup",
+        "name": "Cloud_Network_1",
+        "resourceLink": "/provisioning/resources/compute-networks/83221296-4b96-4931-839e-34e242ad8baf",
+        "account": "WF Lab"
+      },
+      "state": "OK"
+    }
+  ],
+  "status": "CREATE_SUCCESSFUL"
+}

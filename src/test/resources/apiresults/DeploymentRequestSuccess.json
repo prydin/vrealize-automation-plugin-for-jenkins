@@ -1,0 +1,16 @@
+{
+  "id": "c10cb9b9-feb3-4cfc-8b6c-0ade9756d372",
+  "name": "Power Off",
+  "requestedBy": "prydin@somewhere.com",
+  "blueprintId": "58bc8ef5-7100-4326-b4af-99e4db2ec4da:6",
+  "actionId": "Deployment.PowerOff",
+  "inputs": {},
+  "status": "SUCCESSFUL",
+  "details": "",
+  "createdAt": "2020-09-14T14:36:39.435380Z",
+  "updatedAt": "2020-09-14T14:36:39.435380Z",
+  "totalTasks": 1,
+  "completedTasks": 0,
+  "dismissed": false,
+  "cancelable": true
+}

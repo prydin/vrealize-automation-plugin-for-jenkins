@@ -1,0 +1,57 @@
+{
+  "administrators": [
+    {
+      "email": "prydin@somewhere.com",
+      "type": "user"
+    }
+  ],
+  "members": [],
+  "viewers": [],
+  "zones": [
+    {
+      "zoneId": "cf8dc18d-eb60-495e-99d3-68c7aa4c5775",
+      "priority": 0,
+      "maxNumberInstances": 0,
+      "memoryLimitMB": 0,
+      "cpuLimit": 0,
+      "storageLimitGB": 0
+    },
+    {
+      "zoneId": "9f1113c9b97e1c75580d86d3f2b88",
+      "priority": 1000,
+      "maxNumberInstances": 0,
+      "memoryLimitMB": 0,
+      "cpuLimit": 0,
+      "storageLimitGB": 0
+    },
+    {
+      "zoneId": "25357a7d-5cee-4457-a1a3-a72b797a92a5",
+      "priority": 100,
+      "maxNumberInstances": 0,
+      "memoryLimitMB": 0,
+      "cpuLimit": 0,
+      "storageLimitGB": 0
+    }
+  ],
+  "constraints": {
+    "extensibility": [
+      {
+        "mandatory": true,
+        "expression": "pontus:ext-onprem"
+      }
+    ]
+  },
+  "operationTimeout": 0,
+  "machineNamingTemplate": "${userName}-${######}",
+  "sharedResources": true,
+  "name": "JenkinsTest",
+  "description": "",
+  "id": "9de81991-4063-43b8-9542-dbaff1e588f8",
+  "organizationId": "7c6b36ef-7829-46a8-9618-5b294f8c161e",
+  "orgId": "7c6b36ef-7829-46a8-9618-5b294f8c161e",
+  "_links": {
+    "self": {
+      "href": "/iaas/api/projects/9de81991-4063-43b8-9542-dbaff1e588f8"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+"catalogItemName": "jenkins-test",
+"version": "2",
+"projectName": "JenkinsTest",
+"deploymentName": "Jenkins-#",
+"inputs":
+  "username": "test"
+"count": 1

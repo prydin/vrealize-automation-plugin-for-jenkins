@@ -1,0 +1,7 @@
+{
+  "actionId": "Deployment.PowerOff",
+  "inputs": {
+    "someInput": "someValue"
+  },
+  "reason": "Because I can"
+}

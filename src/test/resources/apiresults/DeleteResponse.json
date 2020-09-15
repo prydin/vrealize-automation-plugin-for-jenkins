@@ -1,0 +1,15 @@
+{
+  "id": "c17ed6b1-99ad-4fe5-b046-0588a5e92980",
+  "name": "Delete",
+  "requestedBy": "prydin@somewhere.com",
+  "blueprintId": "inline-blueprint",
+  "inputs": {},
+  "status": "PENDING",
+  "details": "",
+  "createdAt": "2020-09-09T20:35:07.188057Z",
+  "updatedAt": "2020-09-09T20:35:07.188057Z",
+  "totalTasks": 2,
+  "completedTasks": 0,
+  "dismissed": false,
+  "cancelable": true
+}
