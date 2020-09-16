@@ -324,7 +324,7 @@ public class VraApiTest {
             deploymentId,
             action.getActionId(),
             action.getReason(),
-            (Map<String, String>) action.getInputs());
+            (Map<String, Object>) action.getInputs());
     verify(mocked, times(1))
         .post(
             eq("/deployment/api/deployments/" + deploymentId + "/requests"),

@@ -133,7 +133,7 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
     String projectName;
     String deploymentName;
     String reason;
-    Map<String, String> inputs;
+    Map<String, Object> inputs;
     int count = 1;
 
     public Config() {}
@@ -178,11 +178,11 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
       this.reason = reason;
     }
 
-    public Map<String, String> getInputs() {
+    public Map<String, Object> getInputs() {
       return inputs;
     }
 
-    public void setInputs(final Map<String, String> inputs) {
+    public void setInputs(final Map<String, Object> inputs) {
       this.inputs = inputs;
     }
 

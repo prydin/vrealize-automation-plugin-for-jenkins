@@ -178,7 +178,7 @@ public class VraApi implements Serializable {
       final String project,
       final String deploymentName,
       final String reason,
-      final Map<String, String> inputs,
+      final Map<String, Object> inputs,
       final int count)
       throws VRAException {
     final CatalogItem ci = getCatalogItemByName(ciName);
@@ -300,7 +300,7 @@ public class VraApi implements Serializable {
       final String deploymentId,
       final String actionId,
       final String reason,
-      final Map<String, String> inputs)
+      final Map<String, Object> inputs)
       throws VRAException {
     final ResourceActionRequest payload = new ResourceActionRequest();
     payload.setActionId(actionId);
@@ -318,7 +318,7 @@ public class VraApi implements Serializable {
       final String resourceId,
       final String actionId,
       final String reason,
-      final Map<String, String> inputs)
+      final Map<String, Object> inputs)
       throws VRAException {
     final ResourceActionRequest payload = new ResourceActionRequest();
     payload.setActionId(actionId);

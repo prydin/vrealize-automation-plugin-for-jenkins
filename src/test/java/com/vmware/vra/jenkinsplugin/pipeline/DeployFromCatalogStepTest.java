@@ -90,12 +90,14 @@ public class DeployFromCatalogStepTest {
           config.put("configFormat", "json");
           final String configText = FileUtils.loadResource("/apiresults/DeploymentConfig.json");
           config.put("config", configText);
+          config.put("vraURL", "vraURL");
+          config.put("token", "token");
           final DescribableModel<DeployFromCatalogStep> model =
               new DescribableModel<>(DeployFromCatalogStep.class);
           DeployFromCatalogStep step = model.instantiate(config, StreamTaskListener.fromStderr());
           step = sct.configRoundTrip(step);
-          // assertEquals("vraURL", step.getVraURL());
-          // assertEquals("token", step.getToken());
+          assertEquals("vraURL", step.getVraURL());
+          assertEquals("token", step.getToken());
           assertEquals(configText, step.getConfig());
           assertEquals("json", step.getConfigFormat());
           model.uninstantiate2_(step);
@@ -110,13 +112,15 @@ public class DeployFromCatalogStepTest {
           final Map<String, Object> config = new HashMap<>();
           config.put("configFormat", "yaml");
           final String configText = FileUtils.loadResource("/apiresults/DeploymentConfig.yaml");
+          config.put("vraURL", "vraURL");
+          config.put("token", "token");
           config.put("config", configText);
           final DescribableModel<DeployFromCatalogStep> model =
               new DescribableModel<>(DeployFromCatalogStep.class);
           DeployFromCatalogStep step = model.instantiate(config, StreamTaskListener.fromStderr());
           step = sct.configRoundTrip(step);
-          // assertEquals("vraURL", step.getVraURL());
-          // assertEquals("token", step.getToken());
+          assertEquals("vraURL", step.getVraURL());
+          assertEquals("token", step.getToken());
           assertEquals(configText, step.getConfig());
           assertEquals("yaml", step.getConfigFormat());
           model.uninstantiate2_(step);
