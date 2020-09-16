@@ -44,8 +44,24 @@ can start using it.
 You have now deployed a machine and received an IP address for it. You may 
 use it for SSH steps etc.
 
+## Global settings
+This plugin allows you to configure the address of the vRealize Automation environment, as
+well as its API key. This is useful when you're only interacting with a single instance
+of vRealize Automation and allows you to omit address and credentials from the actual 
+pipelines. The credentials are configured as a reference to a standard Jenkins string
+credential.
+
+![Global Settings](doc/img/global_settings.png)
+
+## Available pipeline steps
+* [vraDeleteDeployment - Deleta a deployment and its resources](doc/vraDeleteDeployment.md)
+* [vraDeployFromCatalog - Deploy from a catalog item](doc/vraDeployFromCatalog.md)
+* [vraGetDeployment - Get details about a deployment](doc/vraGetDeployment.md)
+* [vraRunAction - Run a day two operation](doc/vraRunAction.md)
+* [vraWaitForAddress - Wait until a resource has a valid address and return it](doc/vraWaitForAddress.md)
+
 ## Contributing
 
-We strongly encourage contributions to this project and would love to use your code and ideas!
+We strongly encourage contributions to this project and would love to include your code and ideas!
 For details, please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
 
