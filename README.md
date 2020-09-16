@@ -3,7 +3,7 @@
 ## Introduction
 
 This plugin lets you create, manage and destroy virtual machines, networks, load balancers
-and other resources managed by vRealize Automation 8.x. 
+and other resources managed by [vRealize Automation 8.x](https://www.vmware.com/products/vrealize-automation.html). 
 
 The plugin is currently focused on pipelines rather than freestyle project. If you see
 a need for support for freestyle, please open an issue and we will put that on the 
