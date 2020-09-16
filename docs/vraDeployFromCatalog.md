@@ -3,7 +3,7 @@
 ### Step name
 vraDeployFromCatalog
 
-### Descriptions
+### Description
 Creates a new deployment based on a catalog item and ties it to a specified project.
 This step can be run in two modes: Either the details about the deployment are specified as 
 individual parameters, or they are supplied as a JSON or Yaml string. The latter is
@@ -21,9 +21,13 @@ useful when you want to read the deployment specification from a file.
 | reason | String | The reason for the deployment. (Optional)
 | inputs | String or Map | Blueprint inputs. Key-value pairs encoded as a JSON string | 
 | count | Integer | Then number of copies of this catalog item to deploy |
-| config | String | The entire configuration of a catalog item as a JSON or Yaml string. Mutually exculsive with ```projectName```, ```catalogItemName```, ```deploymentName```, ```reason``` and ```inputs```.
+| config | String | The entire configuration of a catalog item as a JSON or Yaml string. Mutually exculsive with ```projectName```, ```catalogItemName```, ```deploymentName```, ```reason```, ```count``` and ```inputs```.
 | configFormat | String | The format of the config string. Allowed values are "yaml" or "json" |
 | timeout | Long | Timeout for the deletion to complete, in seconds (default: 300) |
+
+### Return value
+Returns a list of maps corresponding to the fields of a [Deployment](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/com/vmware/vra/jenkinsplugin/model/catalog/Deployment.html). 
+The size of the array should match the supplied ```count``` parameter.
 
 ### vRealize Automation URL and token
 If the ```vraURL``` or ```token``` parameters are not specified, they are obtained from the 

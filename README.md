@@ -51,14 +51,14 @@ of vRealize Automation and allows you to omit address and credentials from the a
 pipelines. The credentials are configured as a reference to a standard Jenkins string
 credential.
 
-![Global Settings](doc/img/global_settings.png)
+![Global Settings](docs/img/global_settings.png)
 
 ## Available pipeline steps
-* [vraDeleteDeployment - Deleta a deployment and its resources](doc/vraDeleteDeployment.md)
-* [vraDeployFromCatalog - Deploy from a catalog item](doc/vraDeployFromCatalog.md)
-* [vraGetDeployment - Get details about a deployment](doc/vraGetDeployment.md)
-* [vraRunAction - Run a day two operation](doc/vraRunAction.md)
-* [vraWaitForAddress - Wait until a resource has a valid address and return it](doc/vraWaitForAddress.md)
+* [vraDeleteDeployment - Deleta a deployment and its resources](docs/vraDeleteDeployment.md)
+* [vraDeployFromCatalog - Deploy from a catalog item](docs/vraDeployFromCatalog.md)
+* [vraGetDeployment - Get details about a deployment](docs/vraGetDeployment.md)
+* [vraRunAction - Run a day two operation](docs/vraRunAction.md)
+* [vraWaitForAddress - Wait until a resource has a valid address and return it](docs/vraWaitForAddress.md)
 
 ## Javadoc
 [Javadoc](doc/apidocs/index.html)
