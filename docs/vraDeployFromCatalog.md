@@ -29,6 +29,11 @@ useful when you want to read the deployment specification from a file.
 Returns a list of maps corresponding to the fields of a [Deployment](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/com/vmware/vra/jenkinsplugin/model/catalog/Deployment.html). 
 The size of the array should match the supplied ```count``` parameter.
 
+### Deployment naming
+Deployment names must be unique. When you omit the deployment name, a unique name is automatically generated. If you want
+a custom name and want to make sure it's unique, simply include a '#' character. This will be replaced with a UUID once
+the deployment is submitted. For example "MyDeployment-#" will expand to something similar to "MyDeployment-8F02D710-9312-4414-9B38-1BB315D8301D".
+
 ### vRealize Automation URL and token
 If the ```vraURL``` or ```token``` parameters are not specified, they are obtained from the 
 global settings (if present).
