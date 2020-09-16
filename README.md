@@ -61,7 +61,7 @@ credential.
 * [vraWaitForAddress - Wait until a resource has a valid address and return it](docs/vraWaitForAddress.md)
 
 ## Javadoc
-[Javadoc](doc/apidocs/index.html)
+[Javadoc](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/)
 
 ## Contributing
 
