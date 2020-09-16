@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>io.jenkins.plugins</groupId>
-    <artifactId>vra8-jenkins-plugin</artifactId>
+    <artifactId>vrealize-automation-8</artifactId>
     <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
     <properties>
@@ -19,7 +19,15 @@
         <java.level>8</java.level>
         <pipeline-model-definition-plugin.version>1.5.1</pipeline-model-definition-plugin.version>
     </properties>
-    <name>vRealize Automation 8.x</name>
+    <name>vRealize Automation 8.x Plugin</name>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <dependencyManagement>
         <dependencies>
@@ -182,16 +190,12 @@
         </dependency>
     </dependencies>
 
-
-    <!-- If you want this to appear on the plugin site page:
     <developers>
-      <developer>
-        <id>bhacker</id>
-        <name>Bob Q. Hacker</name>
-        <email>bhacker@nowhere.net</email>
-      </developer>
-    </developers> -->
-
+        <developer>
+            <id>prydin</id>
+            <name>Pontus Rydin</name>
+        </developer>
+    </developers>
 
     <repositories>
         <repository>

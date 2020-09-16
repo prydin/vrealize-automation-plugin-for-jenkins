@@ -24,13 +24,16 @@
 
 package com.vmware.vra.jenkinsplugin.util;
 
+import com.google.gson.Gson;
 import com.google.gson.internal.bind.util.ISO8601Utils;
+import com.vmware.vra.jenkinsplugin.pipeline.StepWithInputs;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import org.apache.commons.lang.StringUtils;
 
 public class MapUtils {
   public static Object mappify(final Object o) {
@@ -151,5 +155,18 @@ public class MapUtils {
     map.put(k1, v1);
     map.put(k2, v2);
     return map;
+  }
+
+  public static Map<String, Object> resolveFromStep(final StepWithInputs step) {
+    if (step.getInputMap() != null && step.getInputs() != null) {
+      throw new IllegalArgumentException(
+          "Parameters 'input' and 'inputMap' are mutually exclusive");
+    }
+    if (step.getInputMap() != null) {
+      return step.getInputMap();
+    } else if (StringUtils.isNotBlank(step.getInputs())) {
+      return new Gson().fromJson(step.getInputs(), Map.class);
+    }
+    return Collections.EMPTY_MAP;
   }
 }

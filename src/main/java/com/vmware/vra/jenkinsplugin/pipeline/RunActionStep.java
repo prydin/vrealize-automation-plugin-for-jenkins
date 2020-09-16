@@ -25,28 +25,26 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.Gson;
-import com.vmware.vra.jenkinsplugin.vra.VRAException;
+import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.TaskListener;
-import java.util.Collections;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
-import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepDescriptor;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 
-public class RunActionStep extends DeploymentAwareStep {
+public class RunActionStep extends DeploymentAwareStep implements Serializable, StepWithInputs {
   private static final long serialVersionUID = 7632401023113802055L;
 
   private String inputs;
 
-  private Map<String, String> inputMap;
+  private Map<String, Object> inputMap;
 
   private String resourceName;
 
@@ -59,6 +57,7 @@ public class RunActionStep extends DeploymentAwareStep {
   @DataBoundConstructor
   public RunActionStep() {}
 
+  @Override
   public String getInputs() {
     return inputs;
   }
@@ -77,12 +76,13 @@ public class RunActionStep extends DeploymentAwareStep {
     this.timeout = timeout;
   }
 
-  public Map<String, String> getInputMap() {
+  @Override
+  public Map<String, Object> getInputMap() {
     return inputMap;
   }
 
   @DataBoundSetter
-  public void setInputMap(final Map<String, String> inputMap) {
+  public void setInputMap(final Map<String, Object> inputMap) {
     this.inputMap = inputMap;
   }
 
@@ -118,16 +118,9 @@ public class RunActionStep extends DeploymentAwareStep {
     return new RunActionExecution(stepContext, this);
   }
 
-  public Map<String, String> resolveInputs() throws VRAException {
-    if (getInputMap() != null && getInputs() != null) {
-      throw new VRAException("Parameters 'input' and 'inputMap' are mutually exclusive");
-    }
-    if (getInputMap() != null) {
-      return getInputMap();
-    } else if (StringUtils.isNotBlank(getInputs())) {
-      return new Gson().fromJson(getInputs(), Map.class);
-    }
-    return Collections.EMPTY_MAP;
+  @Override
+  public Map<String, Object> resolveInputs() {
+    return MapUtils.resolveFromStep(this);
   }
 
   @Extension
