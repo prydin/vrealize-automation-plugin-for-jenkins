@@ -60,6 +60,9 @@ credential.
 * [vraRunAction - Run a day two operation](doc/vraRunAction.md)
 * [vraWaitForAddress - Wait until a resource has a valid address and return it](doc/vraWaitForAddress.md)
 
+## Javadoc
+[Javadoc](doc/apidocs/index.html)
+
 ## Contributing
 
 We strongly encourage contributions to this project and would love to include your code and ideas!
