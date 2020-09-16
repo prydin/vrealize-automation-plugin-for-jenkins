@@ -1,8 +1,0 @@
-com.vmware.vra.jenkinsplugin
-com.vmware.vra.jenkinsplugin.model
-com.vmware.vra.jenkinsplugin.model.catalog
-com.vmware.vra.jenkinsplugin.model.deployment
-com.vmware.vra.jenkinsplugin.model.iaas
-com.vmware.vra.jenkinsplugin.pipeline
-com.vmware.vra.jenkinsplugin.util
-com.vmware.vra.jenkinsplugin.vra
