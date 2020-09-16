@@ -20,7 +20,7 @@ Returns a snapshot of the full set of details about a deployment.
 | timeout | Long | Timeout for the deletion to complete, in seconds (default: 300) |
 
 ### Return value
-Returns a list of maps corresponding to the fields of a [Deployment](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/com/vmware/vra/jenkinsplugin/model/catalog/Deployment.html). 
+Returns a list of maps corresponding to the fields of a [DeploymentRequest](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/com/vmware/vra/jenkinsplugin/model/deployment/DeploymentRequest.html).
 
 ### vRealize Automation URL and token
 If the ```vraURL``` or ```token``` parameters are not specified, they are obtained from the 
