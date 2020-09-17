@@ -217,7 +217,7 @@
             <id>spotbugs-exclusion-file</id>
             <activation>
                 <file>
-                    <exists>${basedir}/src/spotbugs/excludesFilter.xml</exists>
+                    <exists>${project.build.sourceDirectory}/spotbugs/excludesFilter.xml</exists>
                 </file>
             </activation>
             <build>
@@ -230,7 +230,7 @@
                                 <id>spotbugs</id>
                                 <configuration>
                                     <!-- Original profile had project.basedir here. Seems to break Travis -->
-                                    <excludeFilterFile>${basedir}/src/spotbugs/excludesFilter.xml
+                                    <excludeFilterFile>${project.build.sourceDirectory}/spotbugs/excludesFilter.xml
                                     </excludeFilterFile>
                                 </configuration>
                             </execution>
