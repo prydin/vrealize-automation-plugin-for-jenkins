@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.vmware.vra.jenkinsplugin.testutils.FileUtils;
 import hudson.util.StreamTaskListener;
@@ -114,6 +115,7 @@ public class DeployFromCatalogStepTest {
           final String configText = FileUtils.loadResource("/apiresults/DeploymentConfig.yaml");
           config.put("vraURL", "vraURL");
           config.put("token", "token");
+          config.put("trustSelfSignedCert", true);
           config.put("config", configText);
           final DescribableModel<DeployFromCatalogStep> model =
               new DescribableModel<>(DeployFromCatalogStep.class);
@@ -123,6 +125,7 @@ public class DeployFromCatalogStepTest {
           assertEquals("token", step.getToken());
           assertEquals(configText, step.getConfig());
           assertEquals("yaml", step.getConfigFormat());
+          assertTrue(step.isTrustSelfSignedCert());
           model.uninstantiate2_(step);
         });
   }

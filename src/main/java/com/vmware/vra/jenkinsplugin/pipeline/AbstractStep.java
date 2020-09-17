@@ -40,6 +40,8 @@ public abstract class AbstractStep extends Step implements Serializable {
 
   protected String token;
 
+  protected boolean trustSelfSignedCert;
+
   private VraApi cachedClient;
 
   public AbstractStep() {}
@@ -48,7 +50,7 @@ public abstract class AbstractStep extends Step implements Serializable {
     if (cachedClient != null) {
       return cachedClient;
     }
-    return cachedClient = new VraApi(resolveVraURL(), resolveToken());
+    return cachedClient = new VraApi(resolveVraURL(), resolveToken(), trustSelfSignedCert);
   }
 
   @DoNotCall("use resolveVraURL instead!")
@@ -76,6 +78,19 @@ public abstract class AbstractStep extends Step implements Serializable {
   @DataBoundSetter
   public void setToken(final String token) {
     this.token = token;
+  }
+
+  public boolean isTrustSelfSignedCert() {
+    return trustSelfSignedCert;
+  }
+
+  public boolean getTrustSelfSignedCert() {
+    return trustSelfSignedCert;
+  }
+
+  @DataBoundSetter
+  public void setTrustSelfSignedCert(final boolean trustSelfSignedCert) {
+    this.trustSelfSignedCert = trustSelfSignedCert;
   }
 
   public String resolveToken() {

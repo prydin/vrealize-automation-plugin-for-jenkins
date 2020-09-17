@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import hudson.util.StreamTaskListener;
 import java.util.HashMap;
@@ -50,6 +51,7 @@ public class GetDeploymentStepTest {
           config.put("vraURL", "vraURL");
           config.put("token", "token");
           config.put("deploymentId", "deploymentId");
+          config.put("trustSelfSignedCert", true);
           final DescribableModel<GetDeploymentStep> model =
               new DescribableModel<>(GetDeploymentStep.class);
           GetDeploymentStep step = model.instantiate(config, StreamTaskListener.fromStderr());
@@ -57,6 +59,7 @@ public class GetDeploymentStepTest {
           assertEquals("vraURL", step.getVraURL());
           assertEquals("token", step.getToken());
           assertEquals("deploymentId", step.getDeploymentId());
+          assertTrue(step.isTrustSelfSignedCert());
           model.uninstantiate2_(step);
         });
   }

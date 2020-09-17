@@ -70,12 +70,11 @@ public class VraApi implements Serializable {
                   return Pattern.compile(pattern);
                 }
               });
-  private static VraClientFactory clientFactory =
-      new DefaultFactory(); // Hack to make testing easier. See below!
   private final VraClient vraClient;
 
-  public VraApi(final String url, final String token) throws VRAException {
-    this(clientFactory.createClient(url, token));
+  public VraApi(final String url, final String token, final boolean trustSelfSignedCert)
+      throws VRAException {
+    this(new VraClient(url, token, trustSelfSignedCert));
   }
 
   public VraApi(final VraClient vraClient) {
@@ -89,10 +88,6 @@ public class VraApi implements Serializable {
       throw new IllegalArgumentException(
           "Something went wrong while parsing regexp for resource " + resourceName, e);
     }
-  }
-
-  public static void setClientFactory(final VraClientFactory clientFactory) {
-    VraApi.clientFactory = clientFactory;
   }
 
   private static void checkResponseSingleton(final List<?> content) throws VRAException {
@@ -347,15 +342,5 @@ public class VraApi implements Serializable {
     return getResourcesForDeployment(deploymentId).stream()
         .filter((r) -> r.getName().equals(resourceName))
         .collect(Collectors.toList());
-  }
-
-  // This construct is a bit of a hack to make it easier to inject mocked clients
-  // when we're testing. We can't use mockedConstruction, since the creation may happen in
-  // a different thread than the caller's.
-  public static class DefaultFactory implements VraClientFactory {
-    @Override
-    public VraClient createClient(final String url, final String token) throws VRAException {
-      return new VraClient(url, token);
-    }
   }
 }

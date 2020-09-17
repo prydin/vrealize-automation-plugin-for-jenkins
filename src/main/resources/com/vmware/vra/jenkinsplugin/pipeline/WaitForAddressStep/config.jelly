@@ -31,6 +31,9 @@
     <f:entry field="token" title="${%API Token}">
         <f:textbox/>
     </f:entry>
+    <f:entry field="trustSelfSignedCert" title="${%Trust Self-Signed Certificate (not recommended)}">
+        <f:checkbox/>
+    </f:entry>
     <f:entry field="deploymentId" title="${%Deployment ID}">
         <f:textbox/>
     </f:entry>

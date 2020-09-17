@@ -13,6 +13,7 @@ address, due to DHCP and similar mechanisms.
 |------|------|-------------|
 | vraUrl | String | URL to the vRealize Automation Instance (optional) |
 | token | String | vRealize Automation API token |
+| trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | deploymentId | String |The ID of the deployment to fetch (mutually exclusive with deploymentName) |
 | deploymentName | String | The name of the deployment to fetch (mutually exclusive with deploymentId) |
 | resourceName | String | The name of the resource within the blueprint to obtain an address for |

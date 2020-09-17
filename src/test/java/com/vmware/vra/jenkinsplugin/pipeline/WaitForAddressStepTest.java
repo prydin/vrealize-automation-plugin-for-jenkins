@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import hudson.util.StreamTaskListener;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ public class WaitForAddressStepTest {
           final Map<String, Object> config = new HashMap<>();
           config.put("vraURL", "vraURL");
           config.put("token", "token");
+          config.put("trustSelfSignedCert", true);
           config.put("deploymentId", "deploymentId");
           config.put("resourceName", "resourceName");
           config.put("timeout", 1L);
@@ -58,6 +60,7 @@ public class WaitForAddressStepTest {
           assertEquals("resourceName", step.getResourceName());
           assertEquals("deploymentId", step.getDeploymentId());
           assertEquals(1L, step.getTimeout());
+          assertTrue(step.isTrustSelfSignedCert());
           model.uninstantiate2_(step);
         });
   }

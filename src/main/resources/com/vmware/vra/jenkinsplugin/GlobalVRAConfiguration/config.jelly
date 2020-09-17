@@ -31,6 +31,9 @@
         </f:entry>
         <f:entry field="credentialId" title="${%Credential}">
             <c:select/>
-         </f:entry>
+        </f:entry>
+        <f:entry field="trustSelfSignedCert" title="${%Trust Self-Signed Certificate (not recommended)}">
+            <f:checkbox/>
+        </f:entry>
     </f:section>
 </j:jelly>

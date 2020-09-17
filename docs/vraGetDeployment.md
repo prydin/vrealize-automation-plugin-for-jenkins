@@ -11,6 +11,7 @@ Returns a snapshot of the full set of details about a deployment.
 |------|------|-------------|
 | vraUrl | String | URL to the vRealize Automation Instance (optional) |
 | token | String | vRealize Automation API token |
+| trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | deploymentId | String |The ID of the deployment to fetch (mutually exclusive with deploymentName) |
 | deploymentName | String | The name of the deployment to fetch (mutually exclusive with deploymentId) |
 | expandResources | Boolean | If true, information about all the resources in the deployment are loaded. See remark below! |

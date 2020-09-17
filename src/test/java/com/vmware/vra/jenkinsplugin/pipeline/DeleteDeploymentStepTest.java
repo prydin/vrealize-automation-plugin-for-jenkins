@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import hudson.util.StreamTaskListener;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class DeleteDeploymentStepTest {
           final Map<String, Object> config = new HashMap<>();
           config.put("vraURL", "vraURL");
           config.put("token", "token");
+          config.put("trustSelfSignedCert", true);
           config.put("deploymentId", "deploymentId");
           config.put("timeout", 1L);
           final DescribableModel<DeleteDeploymentStep> model =
@@ -59,6 +61,7 @@ public class DeleteDeploymentStepTest {
           assertEquals("token", step.getToken());
           assertEquals("deploymentId", step.getDeploymentId());
           assertEquals(1L, step.getTimeout());
+          assertTrue(step.isTrustSelfSignedCert());
           model.uninstantiate2_(step);
         });
   }
@@ -77,8 +80,8 @@ public class DeleteDeploymentStepTest {
               new DescribableModel<>(DeleteDeploymentStep.class);
           DeleteDeploymentStep step = model.instantiate(config, StreamTaskListener.fromStderr());
           step = sct.configRoundTrip(step);
-          // assertEquals("vraURL", step.getVraURL());
-          // assertEquals("token", step.getToken());
+          assertEquals("vraURL", step.getVraURL());
+          assertEquals("token", step.getToken());
           assertEquals("deploymentName", step.getDeploymentName());
           assertEquals(1L, step.getTimeout());
           model.uninstantiate2_(step);

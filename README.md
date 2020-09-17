@@ -45,11 +45,12 @@ You have now deployed a machine and received an IP address for it. You may
 use it for SSH steps etc.
 
 ## Global settings
-This plugin allows you to configure the address of the vRealize Automation environment, as
-well as its API key. This is useful when you're only interacting with a single instance
-of vRealize Automation and allows you to omit address and credentials from the actual 
-pipelines. The credentials are configured as a reference to a standard Jenkins string
-credential.
+This plugin allows you to configure the address of the vRealize Automation environment, 
+the API key, as well as whether Jenkins should accept vRealize Automation Servers with 
+self-signed certificates. This is useful when you're only interacting with a single 
+instance of vRealize Automation and allows you to omit address and credentials from the 
+actual  pipelines. The credentials are configured as a reference to a standard Jenkins 
+string credential.
 
 ![Global Settings](docs/img/global_settings.png)
 

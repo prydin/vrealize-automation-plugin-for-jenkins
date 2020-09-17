@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import hudson.util.StreamTaskListener;
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class RunActionStepTest extends DeploymentAwareStepTest<RunActionStep> {
           final Map<String, Object> config = new HashMap<>();
           config.put("vraURL", "vraURL");
           config.put("token", "token");
+          config.put("trustSelfSignedCert", true);
           config.put("deploymentId", "deploymentId");
           config.put("timeout", 1L);
           config.put("actionId", "actionId");
@@ -67,6 +69,7 @@ public class RunActionStepTest extends DeploymentAwareStepTest<RunActionStep> {
           assertEquals("actionId", step.getActionId());
           assertEquals("resourceName", step.getResourceName());
           assertEquals("reason", step.getReason());
+          assertTrue(step.isTrustSelfSignedCert());
           model.uninstantiate2_(step);
         });
   }

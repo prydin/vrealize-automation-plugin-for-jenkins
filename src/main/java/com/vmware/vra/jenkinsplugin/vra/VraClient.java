@@ -59,9 +59,12 @@ public class VraClient implements Serializable {
   private static final long serialVersionUID = 3442278892595463523L;
   final String refreshToken;
   final String baseUrl;
+  final boolean trustSelfSignedCert;
 
-  public VraClient(final String baseUrl, final String token) throws VRAException {
+  public VraClient(final String baseUrl, final String token, final boolean trustSelfSignedCert)
+      throws VRAException {
     this.baseUrl = baseUrl;
+    this.trustSelfSignedCert = trustSelfSignedCert;
 
     final AuthenticationResponse resp =
         post(
@@ -118,10 +121,11 @@ public class VraClient implements Serializable {
   }
 
   private CloseableHttpClient getClient() throws VRAException {
-    // TODO: Don't assume self signed is OK!
     try {
       final SSLContextBuilder builder = new SSLContextBuilder();
-      builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+      if (trustSelfSignedCert) {
+        builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+      }
       final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
       return HttpClients.custom().setSSLSocketFactory(sslsf).build();
     } catch (final KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {

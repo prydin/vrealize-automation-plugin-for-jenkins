@@ -48,6 +48,8 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
 
   private String credentialId;
 
+  private boolean trustSelfSignedCert;
+
   public GlobalVRAConfiguration() {
     // When Jenkins is restarted, load any saved configuration from disk.
     load();
@@ -74,6 +76,20 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
   @DataBoundSetter
   public void setCredentialId(final String credentialId) {
     this.credentialId = credentialId;
+    save();
+  }
+
+  public boolean isTrustSelfSignedCert() {
+    return trustSelfSignedCert;
+  }
+
+  public boolean getTrustSelfSignedCert() {
+    return trustSelfSignedCert;
+  }
+
+  @DataBoundSetter
+  public void setTrustSelfSignedCert(final boolean trustSelfSignedCert) {
+    this.trustSelfSignedCert = trustSelfSignedCert;
     save();
   }
 
