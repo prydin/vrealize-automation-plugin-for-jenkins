@@ -40,6 +40,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import javax.annotation.Nonnull;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -72,7 +73,7 @@ public class VraClient implements Serializable {
   }
 
   static String readAll(final InputStream in) throws IOException {
-    final InputStreamReader rdr = new InputStreamReader(in);
+    final InputStreamReader rdr = new InputStreamReader(in, Charset.forName("UTF-8"));
     final StringBuilder sb = new StringBuilder();
     final char[] buffer = new char[8192];
     int n;
@@ -149,7 +150,7 @@ public class VraClient implements Serializable {
     return executeRequest(rq);
   }
 
-  public String executeRequest(final HttpUriRequest rq) throws IOException, VRAException {
+  public String executeRequest(final @Nonnull HttpUriRequest rq) throws IOException, VRAException {
     try (final CloseableHttpClient client = getClient()) {
       rq.setHeader("Accept", "application/json; charset=utf-8");
       if (StringUtils.isNotBlank(refreshToken)) {

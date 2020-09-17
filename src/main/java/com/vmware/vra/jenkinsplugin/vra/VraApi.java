@@ -158,7 +158,7 @@ public class VraApi implements Serializable {
               continue;
             }
             missingResource = false;
-            final String addr = getProperty(r.getProperties(), "address").toString();
+            final String addr = (String) getProperty(r.getProperties(), "address");
             if (addr != null) {
               result.add(addr);
             } else {

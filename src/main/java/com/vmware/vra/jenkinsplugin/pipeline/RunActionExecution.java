@@ -28,7 +28,6 @@ import static com.vmware.vra.jenkinsplugin.util.MapUtils.mappify;
 
 import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.Resource;
-import com.vmware.vra.jenkinsplugin.model.catalog.ResourceActionRequest;
 import com.vmware.vra.jenkinsplugin.model.deployment.DeploymentRequest;
 import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import com.vmware.vra.jenkinsplugin.vra.VraApi;
@@ -90,7 +89,6 @@ public class RunActionExecution extends SynchronousNonBlockingStepExecution<Obje
       throw new IllegalArgumentException(
           "Resource " + resourceName + " was not part of the deployment");
     }
-    final List<ResourceActionRequest> result = new ArrayList<>(drs.size());
     return MapUtils.mappify(
         client.waitForRequestCompletion(
             drs.stream().map(dr -> dr.getId().toString()).collect(Collectors.toList()),
