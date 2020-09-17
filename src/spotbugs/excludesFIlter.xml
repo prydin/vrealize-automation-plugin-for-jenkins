@@ -23,12 +23,12 @@
   ~  * SOFTWARE.
   ~  */
   -->
-        <////33/3/FindBugsFilter>
-<Match>
-    <Or>
-        <Package name="com.vmware.vra.jenkinsplugin.model.deployment"/>
-        <Package name="com.vmware.vra.jenkinsplugin.model.catalog"/>
-        <Package name="com.vmware.vra.jenkinsplugin.model.iaas"/>
-    </Or>
-</Match>
-        </FindBugsFilter>
+<FindBugsFilter>
+    <Match>
+        <Or>
+            <Package name="com.vmware.vra.jenkinsplugin.model.deployment"/>
+            <Package name="com.vmware.vra.jenkinsplugin.model.catalog"/>
+            <Package name="com.vmware.vra.jenkinsplugin.model.iaas"/>
+        </Or>
+    </Match>
+</FindBugsFilter>
