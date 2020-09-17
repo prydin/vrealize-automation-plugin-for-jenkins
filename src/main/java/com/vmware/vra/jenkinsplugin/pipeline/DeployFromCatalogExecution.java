@@ -24,10 +24,10 @@
 
 package com.vmware.vra.jenkinsplugin.pipeline;
 
+import static com.vmware.vra.jenkinsplugin.util.JSONUtils.fromJson;
+import static com.vmware.vra.jenkinsplugin.util.JSONUtils.fromJsonToMap;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequestResponse;
 import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.util.MapUtils;
@@ -36,7 +36,6 @@ import com.vmware.vra.jenkinsplugin.vra.VraApi;
 import hudson.model.TaskListener;
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +48,6 @@ import org.yaml.snakeyaml.Yaml;
 public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecution<Object>
     implements Serializable {
   private static final long serialVersionUID = -2997964521533971915L;
-  private static final Type mapStringString = new TypeToken<Map<String, String>>() {}.getType();
   private final DeployFromCatalogStep step;
 
   protected DeployFromCatalogExecution(
@@ -84,7 +82,7 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
       }
       final Config c;
       if (step.getConfigFormat().toLowerCase().equals("json")) {
-        c = new Gson().fromJson(config, Config.class);
+        c = fromJson(config, Config.class);
       } else if (step.getConfigFormat().toLowerCase().equals("yaml")) {
         final Yaml y = new Yaml();
         c = y.loadAs(config, Config.class);
@@ -109,7 +107,7 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
               ValueCheckers.notBlank(step.getProjectName(), "projectName"),
               processDeploymentName(step.getDeploymentName()),
               step.getReason(),
-              isNotBlank(inputs) ? new Gson().fromJson(inputs, mapStringString) : new HashMap<>(),
+              isNotBlank(inputs) ? fromJsonToMap(inputs) : new HashMap<>(),
               step.getCount());
     }
     log.println("Successfully requested deployment. Deployment ids: " + Arrays.toString(response));

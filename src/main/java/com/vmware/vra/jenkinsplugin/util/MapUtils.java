@@ -24,7 +24,6 @@
 
 package com.vmware.vra.jenkinsplugin.util;
 
-import com.google.gson.Gson;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.vmware.vra.jenkinsplugin.pipeline.StepWithInputs;
 import java.lang.reflect.Array;
@@ -165,7 +164,7 @@ public class MapUtils {
     if (step.getInputMap() != null) {
       return step.getInputMap();
     } else if (StringUtils.isNotBlank(step.getInputs())) {
-      return new Gson().fromJson(step.getInputs(), Map.class);
+      return JSONUtils.fromJson(step.getInputs(), Map.class);
     }
     return Collections.EMPTY_MAP;
   }

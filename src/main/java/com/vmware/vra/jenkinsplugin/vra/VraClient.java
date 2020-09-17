@@ -24,14 +24,9 @@
 
 package com.vmware.vra.jenkinsplugin.vra;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import com.google.gson.stream.JsonWriter;
+import static com.vmware.vra.jenkinsplugin.util.JSONUtils.fromJson;
+import static com.vmware.vra.jenkinsplugin.util.JSONUtils.toJson;
+
 import com.vmware.vra.jenkinsplugin.model.AuthenticationRequest;
 import com.vmware.vra.jenkinsplugin.model.AuthenticationResponse;
 import java.io.IOException;
@@ -44,10 +39,6 @@ import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.util.Date;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
@@ -67,12 +58,10 @@ public class VraClient implements Serializable {
   private static final long serialVersionUID = 3442278892595463523L;
   final String refreshToken;
   final String baseUrl;
-  private final Gson gson;
 
   public VraClient(final String baseUrl, final String token) throws VRAException {
     this.baseUrl = baseUrl;
 
-    gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeAdapter()).create();
     final AuthenticationResponse resp =
         post(
             "/iaas/api/login",
@@ -120,8 +109,8 @@ public class VraClient implements Serializable {
       final Class<R> responseClass)
       throws VRAException {
     try {
-      final String content = post(url, query, gson.toJson(request));
-      return gson.fromJson(content, responseClass);
+      final String content = post(url, query, toJson(request));
+      return fromJson(content, responseClass);
     } catch (final IOException e) {
       throw new VRAException(e);
     }
@@ -181,7 +170,7 @@ public class VraClient implements Serializable {
       throws VRAException {
     try {
       final String content = get(url, query);
-      return gson.fromJson(content, responseClass);
+      return fromJson(content, responseClass);
     } catch (final IOException e) {
       throw new VRAException(e);
     }
@@ -192,61 +181,9 @@ public class VraClient implements Serializable {
       throws VRAException {
     try {
       final String content = delete(url, query);
-      return gson.fromJson(content, responseClass);
+      return fromJson(content, responseClass);
     } catch (final IOException e) {
       throw new VRAException(e);
-    }
-  }
-
-  public static class DateTypeAdapter extends TypeAdapter<Date> {
-
-    private DateFormat dateFormat;
-
-    public DateTypeAdapter() {}
-
-    public DateTypeAdapter(final DateFormat dateFormat) {
-      this.dateFormat = dateFormat;
-    }
-
-    public void setFormat(final DateFormat dateFormat) {
-      this.dateFormat = dateFormat;
-    }
-
-    @Override
-    public void write(final JsonWriter out, final Date date) throws IOException {
-      if (date == null) {
-        out.nullValue();
-      } else {
-        final String value;
-        if (dateFormat != null) {
-          value = dateFormat.format(date);
-        } else {
-          value = ISO8601Utils.format(date, true);
-        }
-        out.value(value);
-      }
-    }
-
-    @Override
-    public Date read(final JsonReader in) throws IOException {
-      try {
-        if (in.peek() == JsonToken.NULL) {
-          in.nextNull();
-          return null;
-        } else {
-          final String date = in.nextString();
-          try {
-            if (dateFormat != null) {
-              return dateFormat.parse(date);
-            }
-            return ISO8601Utils.parse(date, new ParsePosition(0));
-          } catch (final ParseException e) {
-            throw new JsonParseException(e);
-          }
-        }
-      } catch (final IllegalArgumentException e) {
-        throw new JsonParseException(e);
-      }
     }
   }
 }
