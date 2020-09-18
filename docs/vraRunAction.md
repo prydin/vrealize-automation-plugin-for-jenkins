@@ -1,4 +1,4 @@
-# Runs a day 2 operation
+# Run a day 2 operation
 
 ### Step name
 Runs a day 2 operation on a deployment or resource
