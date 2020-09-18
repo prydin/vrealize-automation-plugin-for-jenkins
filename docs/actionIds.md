@@ -23,6 +23,8 @@ actions may be available depending on the type of resources you deploy.
 * Cloud.AWS.EC2.Instance.Reset
 * Cloud.AWS.EC2.Instance.Resize
 * Cloud.AWS.EC2.Instance.Update.Tags
+
+### Microsoft Azure
 * Cloud.AWS.Volume.Disk.Resize
 * Cloud.AWS.Volume.Update.Tags
 * Cloud.Azure.Disk.Disk.Resize
