@@ -27,13 +27,14 @@ package com.vmware.vra.jenkinsplugin.pipelines
 node {
     def config = """
 "catalogItemName": "jenkins-test"
-"version": "2"
+"version": "3"
 "projectName": "JenkinsTest"
 "deploymentName": "JenkinsFromYaml-#"
 "inputs": 
-    "username": "test"
+    "username": "\$USERNAME"
 "count": 1
 """
+    env.USERNAME = "test"
     def dep = vraDeployFromCatalog(
             configFormat: "yaml",
             config: config)
@@ -42,7 +43,7 @@ node {
             deploymentId: dep[0].id,
             resourceName: 'UbuntuMachine')
     echo "Deployed: $dep[0].id, addresses: $addr"
-
+    
     // Power off the machine
     def dep2 = vraRunAction(
             deploymentId: dep[0].id,
@@ -64,7 +65,7 @@ node {
             reason: 'Because I can',
             timeout: 300
     )
-    println "Power down deployment: ${dep2}"
+    println "Power up deployment: ${dep2}"
     println dep2
     assert dep2 != null
     assert dep2.size() == 1

@@ -22,7 +22,7 @@ useful when you want to read the deployment specification from a file.
 | reason | String | The reason for the deployment. (Optional)
 | inputs | String or Map | Blueprint inputs. Key-value pairs encoded as a JSON string | 
 | count | Integer | Then number of copies of this catalog item to deploy |
-| config | String | The entire configuration of a catalog item as a JSON or Yaml string. Mutually exculsive with ```projectName```, ```catalogItemName```, ```deploymentName```, ```reason```, ```count``` and ```inputs```.
+| config | String | The entire configuration of a catalog item as a JSON or Yaml string. Environment variable substitution is supported. Mutually exculsive with ```projectName```, ```catalogItemName```, ```deploymentName```, ```reason```, ```count``` and ```inputs```. 
 | configFormat | String | The format of the config string. Allowed values are "yaml" or "json" |
 | timeout | Long | Timeout for the deletion to complete, in seconds (default: 300) |
 

@@ -33,6 +33,7 @@ import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import com.vmware.vra.jenkinsplugin.util.ValueCheckers;
 import com.vmware.vra.jenkinsplugin.vra.VraApi;
+import hudson.EnvVars;
 import hudson.model.TaskListener;
 import java.io.PrintStream;
 import java.io.Serializable;
@@ -69,7 +70,8 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
 
     final VraApi client = step.getClient();
     final CatalogItemRequestResponse[] response;
-    final String config = step.getConfig();
+    final EnvVars env = getContext().get(EnvVars.class);
+    final String config = env.expand(step.getConfig());
     if (isNotBlank(config)) {
       if (isNotBlank(step.getCatalogItemName())
           || isNotBlank(step.getVersion())

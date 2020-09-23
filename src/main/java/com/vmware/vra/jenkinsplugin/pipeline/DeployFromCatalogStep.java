@@ -27,6 +27,7 @@ package com.vmware.vra.jenkinsplugin.pipeline;
 import com.cloudbees.plugins.credentials.common.StandardListBoxModel;
 import com.google.common.collect.ImmutableSet;
 import com.vmware.vra.jenkinsplugin.util.MapUtils;
+import hudson.EnvVars;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.TaskListener;
@@ -176,7 +177,7 @@ public class DeployFromCatalogStep extends AbstractStep implements Serializable,
 
     @Override
     public Set<? extends Class<?>> getRequiredContext() {
-      return ImmutableSet.of(TaskListener.class, FilePath.class);
+      return ImmutableSet.of(TaskListener.class, FilePath.class, EnvVars.class);
     }
 
     @Override
