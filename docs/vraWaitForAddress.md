@@ -1,4 +1,4 @@
-# Returns the address of a resource once it's available
+# Return the address of a resource once it's available
 
 ### Step name
 vraWaitForAddress
