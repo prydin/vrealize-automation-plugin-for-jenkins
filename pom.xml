@@ -7,7 +7,7 @@
         <version>4.4</version>
         <relativePath />
     </parent>
-    <groupId>org.jenkins-ci.plugins</groupId>
+    <groupId>io.jenkins.plugins</groupId>
     <artifactId>vrealize-automation-8</artifactId>
     <version>1.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
