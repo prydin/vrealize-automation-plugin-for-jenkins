@@ -28,9 +28,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import com.cloudbees.plugins.credentials.CredentialsProvider;
+import com.cloudbees.plugins.credentials.CredentialsScope;
+import com.cloudbees.plugins.credentials.domains.Domain;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import hudson.util.Secret;
+import org.jenkinsci.plugins.plaincredentials.StringCredentials;
+import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.RestartableJenkinsRule;
@@ -53,10 +60,20 @@ public class GlobalConfigurationTest {
   public void uiAndStorage() {
     rr.then(
         r -> {
+          final StringCredentials vraCredentials =
+              new StringCredentialsImpl(
+                  CredentialsScope.GLOBAL, "vraToken", null, Secret.fromString("token"));
+          CredentialsProvider.lookupStores(r.jenkins)
+              .iterator()
+              .next()
+              .addCredentials(Domain.global(), vraCredentials);
+
           assertNull("not set initially", GlobalVRAConfiguration.get().getVraURL());
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput textbox = config.getInputByName("_.vraURL");
           final HtmlCheckBoxInput checkbox = config.getInputByName("_.trustSelfSignedCert");
+          final HtmlSelect credential = config.getSelectByName("_.credentialId");
+          credential.setSelectedIndex(1);
           textbox.setText("hello");
           checkbox.setChecked(true);
 
@@ -73,6 +90,8 @@ public class GlobalConfigurationTest {
               "hello",
               GlobalVRAConfiguration.get().getVraURL());
           assertTrue(GlobalVRAConfiguration.get().getTrustSelfSignedCert());
+          assertEquals(
+              "credential check", "vraToken", GlobalVRAConfiguration.get().getCredentialId());
         });
   }
 }

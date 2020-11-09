@@ -11,11 +11,12 @@ Returns a snapshot of the full set of details about a deployment.
 |------|------|-------------|
 | vraUrl | String | URL to the vRealize Automation Instance (optional) |
 | token | String | vRealize Automation API token |
+| username | String | vRealize Automation Username (mutually exclusive with ```token```)
+| password | String | vRealize Automation Password (mutually exclusive with ```token```)
 | trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | deploymentId | String |The ID of the deployment to fetch (mutually exclusive with deploymentName) |
 | deploymentName | String | The name of the deployment to fetch (mutually exclusive with deploymentId) |
 | expandResources | Boolean | If true, information about all the resources in the deployment are loaded. See remark below! |
-| timeout | Long | Timeout for the deletion to complete, in seconds (default: 300) |
 
 ### Return value
 Returns a map corresponding to the fields of a [Deployment](https://prydin.github.io/vrealize-automation-plugin-for-jenkins/apidocs/com/vmware/vra/jenkinsplugin/model/catalog/Deployment.html). 
@@ -33,8 +34,7 @@ it to ```false``` unless full resource information is needed.
 ```groovy
 node {
     def deployment = vraGetDeployment(
-        deploymentName: "My Deployment",
-        timeout: 300)
+        deploymentName: "My Deployment")
     echo "My deployment has ID ${deployment.id} and is in state ${deployment.status}"
 }
 ```

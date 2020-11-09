@@ -67,4 +67,11 @@ public class E2EPipelinePart1Test extends E2ETestBase {
   public void testDeployFromCatalogPipeline() {
     testPipeline("/com/vmware/vra/jenkinsplugin/pipelines/DeployFromCatalog.groovy");
   }
+
+  @WithTimeout(600)
+  @Test
+  public void testDeployFromCatalogPipelineUsernamePassword() {
+    testPipelineUsernamePassword(
+        "/com/vmware/vra/jenkinsplugin/pipelines/DeployFromCatalog.groovy");
+  }
 }

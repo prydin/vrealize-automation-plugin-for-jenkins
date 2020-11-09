@@ -36,8 +36,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.RestartableJenkinsRule;
 
-public class WaitForAddressStepTest {
+public class WaitForAddressStepTest extends DeploymentAwareStepTest<WaitForAddressStep> {
+  private static final long serialVersionUID = 2411820394789437080L;
   @Rule public RestartableJenkinsRule rr = new RestartableJenkinsRule();
+
+  public WaitForAddressStepTest() {
+    super(WaitForAddressStep.class);
+  }
 
   @Test
   public void configRoundTrip() {

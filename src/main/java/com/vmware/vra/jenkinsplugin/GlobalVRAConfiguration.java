@@ -26,6 +26,7 @@ package com.vmware.vra.jenkinsplugin;
 
 import com.cloudbees.plugins.credentials.CredentialsMatchers;
 import com.cloudbees.plugins.credentials.CredentialsProvider;
+import com.cloudbees.plugins.credentials.common.StandardCredentials;
 import com.cloudbees.plugins.credentials.common.StandardListBoxModel;
 import com.cloudbees.plugins.credentials.domains.URIRequirementBuilder;
 import hudson.Extension;
@@ -35,7 +36,6 @@ import hudson.util.ListBoxModel;
 import java.io.Serializable;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.Jenkins;
-import org.jenkinsci.plugins.plaincredentials.StringCredentials;
 import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
@@ -47,6 +47,8 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
   private String vraURL;
 
   private String credentialId;
+
+  private String domain;
 
   private boolean trustSelfSignedCert;
 
@@ -79,6 +81,15 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
     save();
   }
 
+  public String getDomain() {
+    return domain;
+  }
+
+  @DataBoundSetter
+  public void setDomain(final String domain) {
+    this.domain = domain;
+  }
+
   public boolean isTrustSelfSignedCert() {
     return trustSelfSignedCert;
   }
@@ -108,11 +119,10 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
       }
     }
     return result
-        .includeEmptyValue()
         .includeMatchingAs(
             ACL.SYSTEM,
             instance,
-            StringCredentials.class,
+            StandardCredentials.class,
             URIRequirementBuilder.fromUri(getVraURL()).build(),
             CredentialsMatchers.always())
         .includeCurrentValue(credentialId);

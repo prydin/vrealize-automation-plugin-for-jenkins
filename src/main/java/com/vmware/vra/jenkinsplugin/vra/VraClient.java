@@ -29,6 +29,8 @@ import static com.vmware.vra.jenkinsplugin.util.JSONUtils.toJson;
 
 import com.vmware.vra.jenkinsplugin.model.AuthenticationRequest;
 import com.vmware.vra.jenkinsplugin.model.AuthenticationResponse;
+import com.vmware.vra.jenkinsplugin.model.UserPasswordAuthenticationRequest;
+import com.vmware.vra.jenkinsplugin.model.UserPasswordAuthenticationResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,31 +50,39 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 
 public class VraClient implements Serializable {
   static final String API_VERSION = "2019-09-12";
   private static final long serialVersionUID = 3442278892595463523L;
-  final String refreshToken;
-  final String baseUrl;
-  final boolean trustSelfSignedCert;
+  private final String baseUrl;
+  private final boolean trustSelfSignedCert;
+  private String refreshToken;
+
+  protected VraClient(final String baseUrl, final boolean trustSelfSignedCert) {
+    this.baseUrl = baseUrl;
+    this.trustSelfSignedCert = trustSelfSignedCert;
+  }
 
   public VraClient(final String baseUrl, final String token, final boolean trustSelfSignedCert)
       throws VRAException {
-    this.baseUrl = baseUrl;
-    this.trustSelfSignedCert = trustSelfSignedCert;
+    this(baseUrl, trustSelfSignedCert);
+    authenticate(token);
+  }
 
-    final AuthenticationResponse resp =
-        post(
-            "/iaas/api/login",
-            null,
-            new AuthenticationRequest(token),
-            AuthenticationResponse.class);
-    refreshToken = resp.getToken();
+  public VraClient(
+      final String baseUrl,
+      final String domain,
+      final String username,
+      final String password,
+      final boolean trustSelfSignedCert)
+      throws VRAException {
+    this(baseUrl, trustSelfSignedCert);
+    authenticate(domain, username, password);
   }
 
   static String readAll(final InputStream in) throws IOException {
@@ -106,6 +116,27 @@ public class VraClient implements Serializable {
     return s.toString();
   }
 
+  protected void authenticate(final String token) throws VRAException {
+    final AuthenticationResponse resp =
+        post(
+            "/iaas/api/login",
+            null,
+            new AuthenticationRequest(token),
+            AuthenticationResponse.class);
+    refreshToken = resp.getToken();
+  }
+
+  protected void authenticate(final String domain, final String username, final String password)
+      throws VRAException {
+    final UserPasswordAuthenticationResponse resp =
+        post(
+            "/csp/gateway/am/api/login?access_token",
+            null,
+            new UserPasswordAuthenticationRequest(domain, username, password),
+            UserPasswordAuthenticationResponse.class);
+    authenticate(resp.getRefresh_token());
+  }
+
   public <R> R post(
       final String url,
       final Map<String, String> query,
@@ -124,7 +155,8 @@ public class VraClient implements Serializable {
     try {
       final SSLContextBuilder builder = new SSLContextBuilder();
       if (trustSelfSignedCert) {
-        builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+        final TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
+        builder.loadTrustMaterial(null, acceptingTrustStrategy);
       }
       final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
       return HttpClients.custom().setSSLSocketFactory(sslsf).build();

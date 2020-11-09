@@ -32,6 +32,9 @@
         <f:entry field="credentialId" title="${%Credential}">
             <c:select/>
         </f:entry>
+        <f:entry field="domain" title="${%vRealize Automation login domain}">
+            <f:textbox/>
+        </f:entry>
         <f:entry field="trustSelfSignedCert" title="${%Trust Self-Signed Certificate (not recommended)}">
             <f:checkbox/>
         </f:entry>

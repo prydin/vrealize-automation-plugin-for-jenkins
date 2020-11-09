@@ -78,6 +78,20 @@ public class VraApiTest {
   }
 
   @Test
+  public void testLoginUsername() throws VRAException {
+    // Only works on-premises, so skip if we only have access to cloud.
+    final String url = System.getenv("VRA_ONPREM_URL");
+    final String username = System.getenv("VRA_USERNAME");
+    if (url == null || username == null) {
+      System.err.println("VRA_ONPREM_URL or VRA_USERNAME not set. Skipping test");
+      return;
+    }
+    final VraApi client =
+        new VraApi(url, System.getenv("VRA_DOMAIN"), username, System.getenv("VRA_PASSWORD"), true);
+    assertNotNull(client);
+  }
+
+  @Test
   public void testGetCatalogItemByName() throws VRAException {
     final String url = System.getenv("VRA_URL");
     if (url == null) {

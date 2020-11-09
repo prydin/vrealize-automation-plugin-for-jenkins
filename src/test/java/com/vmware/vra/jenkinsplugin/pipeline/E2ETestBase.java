@@ -2,7 +2,10 @@ package com.vmware.vra.jenkinsplugin.pipeline;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.CredentialsScope;
+import com.cloudbees.plugins.credentials.common.UsernamePasswordCredentials;
 import com.cloudbees.plugins.credentials.domains.Domain;
+import com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.vmware.vra.jenkinsplugin.testutils.FileUtils;
@@ -40,6 +43,48 @@ public class E2ETestBase {
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput textbox = config.getInputByName("_.vraURL");
           textbox.setText(url);
+          config.getSelectByName("_.credentialId").setSelectedIndex(1);
+          r.submit(config);
+
+          final String pipeline = FileUtils.loadResource(name);
+
+          final WorkflowJob job = r.jenkins.createProject(WorkflowJob.class, "project");
+          job.setDefinition(new CpsFlowDefinition(pipeline, true));
+          final WorkflowRun b = rr.j.buildAndAssertSuccess(job);
+          r.assertLogContains("All deployments finished!", b);
+        });
+  }
+
+  protected void testPipelineUsernamePassword(final String name) {
+    final String url = System.getenv("VRA_ONPREM_URL");
+    if (url == null) {
+      System.err.println("VRA_URL not set. Skipping test");
+      return;
+    }
+    final String username = System.getenv("VRA_USERNAME");
+    final String password = System.getenv("VRA_PASSWORD");
+    if (url == null) {
+      System.err.println("VRA_ONPREM_URL or VRA_USERNAME not set. Skipping test");
+      return;
+    }
+    rr.then(
+        r -> {
+          // Create vRA token credential
+          final UsernamePasswordCredentials vraCredentials =
+              new UsernamePasswordCredentialsImpl(
+                  CredentialsScope.GLOBAL, "vraCredentials", "", username, password);
+          CredentialsProvider.lookupStores(r.jenkins)
+              .iterator()
+              .next()
+              .addCredentials(Domain.global(), vraCredentials);
+
+          // Edit configuration
+          final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
+          final HtmlTextInput vraUrl = config.getInputByName("_.vraURL");
+          final HtmlCheckBoxInput trustSelfSignedCert =
+              config.getInputByName("_.trustSelfSignedCert");
+          trustSelfSignedCert.setChecked(true);
+          vraUrl.setText(url);
           config.getSelectByName("_.credentialId").setSelectedIndex(1);
           r.submit(config);
 
