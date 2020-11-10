@@ -50,7 +50,7 @@ public abstract class AbstractStep extends Step implements Serializable {
 
   protected String password;
 
-  protected boolean trustSelfSignedCert;
+  protected volatile boolean trustSelfSignedCert;
 
   private VraApi cachedClient;
 
