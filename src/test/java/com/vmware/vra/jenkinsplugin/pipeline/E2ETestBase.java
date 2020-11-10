@@ -5,7 +5,6 @@ import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.common.UsernamePasswordCredentials;
 import com.cloudbees.plugins.credentials.domains.Domain;
 import com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl;
-import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.vmware.vra.jenkinsplugin.testutils.FileUtils;
@@ -81,9 +80,6 @@ public class E2ETestBase {
           // Edit configuration
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput vraUrl = config.getInputByName("_.vraURL");
-          final HtmlCheckBoxInput trustSelfSignedCert =
-              config.getInputByName("_.trustSelfSignedCert");
-          trustSelfSignedCert.setChecked(true);
           vraUrl.setText(url);
           config.getSelectByName("_.credentialId").setSelectedIndex(1);
           r.submit(config);

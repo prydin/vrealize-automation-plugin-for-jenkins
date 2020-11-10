@@ -34,7 +34,7 @@ public class UserPasswordAuthenticationResponse {
   public UserPasswordAuthenticationResponse() {}
 
   public UserPasswordAuthenticationResponse(
-          final String scope, final String access_token, final String refresh_token) {
+      final String scope, final String access_token, final String refresh_token) {
     this.scope = scope;
     this.access_token = access_token;
     this.refresh_token = refresh_token;

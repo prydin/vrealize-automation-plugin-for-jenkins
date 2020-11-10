@@ -26,12 +26,10 @@ package com.vmware.vra.jenkinsplugin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.domains.Domain;
-import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -71,11 +69,9 @@ public class GlobalConfigurationTest {
           assertNull("not set initially", GlobalVRAConfiguration.get().getVraURL());
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput textbox = config.getInputByName("_.vraURL");
-          final HtmlCheckBoxInput checkbox = config.getInputByName("_.trustSelfSignedCert");
           final HtmlSelect credential = config.getSelectByName("_.credentialId");
           credential.setSelectedIndex(1);
           textbox.setText("hello");
-          checkbox.setChecked(true);
 
           r.submit(config);
           assertEquals(
@@ -89,7 +85,6 @@ public class GlobalConfigurationTest {
               "still there after restart of Jenkins",
               "hello",
               GlobalVRAConfiguration.get().getVraURL());
-          assertTrue(GlobalVRAConfiguration.get().getTrustSelfSignedCert());
           assertEquals(
               "credential check", "vraToken", GlobalVRAConfiguration.get().getCredentialId());
         });

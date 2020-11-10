@@ -50,7 +50,7 @@ public abstract class AbstractStep extends Step implements Serializable {
 
   protected String password;
 
-  protected Boolean trustSelfSignedCert; // We want it to be nullable, hence the object type.
+  protected boolean trustSelfSignedCert;
 
   private VraApi cachedClient;
 
@@ -85,7 +85,7 @@ public abstract class AbstractStep extends Step implements Serializable {
           new VraApi(
               resolveVraURL(),
               ((StringCredentials) c).getSecret().getPlainText(),
-                  resolveTrustSelfSignedCert());
+              trustSelfSignedCert);
     } else if (c instanceof UsernamePasswordCredentials) {
       final UsernamePasswordCredentials upc = (UsernamePasswordCredentials) c;
       return cachedClient =
@@ -94,7 +94,7 @@ public abstract class AbstractStep extends Step implements Serializable {
               domain,
               upc.getUsername(),
               upc.getPassword().getPlainText(),
-                  resolveTrustSelfSignedCert());
+              trustSelfSignedCert);
     }
     throw new VRAException(
         c.getDescriptor().getDisplayName() + " is not valid set of credentials in this context");
@@ -139,13 +139,6 @@ public abstract class AbstractStep extends Step implements Serializable {
   @DataBoundSetter
   public void setTrustSelfSignedCert(final boolean trustSelfSignedCert) {
     this.trustSelfSignedCert = trustSelfSignedCert;
-  }
-
-  public boolean resolveTrustSelfSignedCert() {
-    if (trustSelfSignedCert != null) {
-      return trustSelfSignedCert;
-    }
-    return GlobalVRAConfiguration.get().getTrustSelfSignedCert();
   }
 
   public String getDomain() {

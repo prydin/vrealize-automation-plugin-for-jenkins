@@ -15,6 +15,7 @@ address, due to DHCP and similar mechanisms.
 | token | String | vRealize Automation API token |
 | username | String | vRealize Automation Username (mutually exclusive with ```token```)
 | password | String | vRealize Automation Password (mutually exclusive with ```token```)
+| domain | String | vRealize Automation authentication domain (mutually exclusive with ```token```)
 | trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | deploymentId | String |The ID of the deployment to fetch (mutually exclusive with deploymentName) |
 | deploymentName | String | The name of the deployment to fetch (mutually exclusive with deploymentId) |

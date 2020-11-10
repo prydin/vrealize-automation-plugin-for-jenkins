@@ -50,8 +50,6 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
 
   private String domain;
 
-  private boolean trustSelfSignedCert;
-
   public GlobalVRAConfiguration() {
     // When Jenkins is restarted, load any saved configuration from disk.
     load();
@@ -88,20 +86,6 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
   @DataBoundSetter
   public void setDomain(final String domain) {
     this.domain = domain;
-  }
-
-  public boolean isTrustSelfSignedCert() {
-    return trustSelfSignedCert;
-  }
-
-  public boolean getTrustSelfSignedCert() {
-    return trustSelfSignedCert;
-  }
-
-  @DataBoundSetter
-  public void setTrustSelfSignedCert(final boolean trustSelfSignedCert) {
-    this.trustSelfSignedCert = trustSelfSignedCert;
-    save();
   }
 
   public ListBoxModel doFillCredentialIdItems(

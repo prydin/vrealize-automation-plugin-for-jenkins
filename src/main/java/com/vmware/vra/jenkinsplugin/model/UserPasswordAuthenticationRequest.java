@@ -33,7 +33,8 @@ public class UserPasswordAuthenticationRequest {
 
   public UserPasswordAuthenticationRequest() {}
 
-  public UserPasswordAuthenticationRequest(final String domain, final String username, final String password) {
+  public UserPasswordAuthenticationRequest(
+      final String domain, final String username, final String password) {
     this.domain = domain;
     this.username = username;
     this.password = password;
