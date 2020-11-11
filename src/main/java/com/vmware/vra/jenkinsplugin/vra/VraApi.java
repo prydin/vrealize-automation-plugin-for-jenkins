@@ -77,6 +77,16 @@ public class VraApi implements Serializable {
     this(new VraClient(url, token, trustSelfSignedCert));
   }
 
+  public VraApi(
+      final String url,
+      final String domain,
+      final String username,
+      final String password,
+      final boolean trustSelfSignedCert)
+      throws VRAException {
+    this(new VraClient(url, domain, username, password, trustSelfSignedCert));
+  }
+
   public VraApi(final VraClient vraClient) {
     this.vraClient = vraClient;
   }

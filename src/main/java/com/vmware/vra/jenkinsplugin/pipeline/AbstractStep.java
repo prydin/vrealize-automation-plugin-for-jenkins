@@ -24,13 +24,17 @@
 
 package com.vmware.vra.jenkinsplugin.pipeline;
 
+import com.cloudbees.plugins.credentials.Credentials;
+import com.cloudbees.plugins.credentials.common.UsernamePasswordCredentials;
 import com.google.errorprone.annotations.DoNotCall;
 import com.vmware.vra.jenkinsplugin.GlobalVRAConfiguration;
 import com.vmware.vra.jenkinsplugin.util.SecretHelper;
 import com.vmware.vra.jenkinsplugin.vra.VRAException;
 import com.vmware.vra.jenkinsplugin.vra.VraApi;
 import java.io.Serializable;
+import java.util.Optional;
 import org.apache.commons.lang.StringUtils;
+import org.jenkinsci.plugins.plaincredentials.StringCredentials;
 import org.jenkinsci.plugins.workflow.steps.Step;
 import org.kohsuke.stapler.DataBoundSetter;
 
@@ -40,7 +44,13 @@ public abstract class AbstractStep extends Step implements Serializable {
 
   protected String token;
 
-  protected boolean trustSelfSignedCert;
+  protected String domain;
+
+  protected String username;
+
+  protected String password;
+
+  protected volatile boolean trustSelfSignedCert;
 
   private VraApi cachedClient;
 
@@ -50,7 +60,44 @@ public abstract class AbstractStep extends Step implements Serializable {
     if (cachedClient != null) {
       return cachedClient;
     }
-    return cachedClient = new VraApi(resolveVraURL(), resolveToken(), trustSelfSignedCert);
+
+    // Try locally defined credentials
+    if (StringUtils.isNotBlank(token)) {
+      return cachedClient = new VraApi(resolveVraURL(), token, trustSelfSignedCert);
+    }
+    if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
+      return cachedClient =
+          new VraApi(resolveVraURL(), domain, username, password, trustSelfSignedCert);
+    }
+
+    // Try credentials from global config
+    final String credId = GlobalVRAConfiguration.get().getCredentialId();
+    if (credId == null) {
+      return null;
+    }
+    final Optional<Credentials> creds = SecretHelper.getSecretFor(credId);
+    if (!creds.isPresent()) {
+      throw new VRAException("Credentials are required");
+    }
+    final Credentials c = creds.get();
+    if (c instanceof StringCredentials) {
+      return cachedClient =
+          new VraApi(
+              resolveVraURL(),
+              ((StringCredentials) c).getSecret().getPlainText(),
+              trustSelfSignedCert);
+    } else if (c instanceof UsernamePasswordCredentials) {
+      final UsernamePasswordCredentials upc = (UsernamePasswordCredentials) c;
+      return cachedClient =
+          new VraApi(
+              resolveVraURL(),
+              domain,
+              upc.getUsername(),
+              upc.getPassword().getPlainText(),
+              trustSelfSignedCert);
+    }
+    throw new VRAException(
+        c.getDescriptor().getDisplayName() + " is not valid set of credentials in this context");
   }
 
   @DoNotCall("use resolveVraURL instead!")
@@ -70,7 +117,6 @@ public abstract class AbstractStep extends Step implements Serializable {
     return GlobalVRAConfiguration.get().getVraURL();
   }
 
-  @DoNotCall("use resolveToken instead!")
   public String getToken() {
     return token;
   }
@@ -80,10 +126,12 @@ public abstract class AbstractStep extends Step implements Serializable {
     this.token = token;
   }
 
+  @DoNotCall("Call resolveTrustSelfSignedCert instead")
   public boolean isTrustSelfSignedCert() {
     return trustSelfSignedCert;
   }
 
+  @DoNotCall("Call resolveTrustSelfSignedCert instead")
   public boolean getTrustSelfSignedCert() {
     return trustSelfSignedCert;
   }
@@ -93,15 +141,30 @@ public abstract class AbstractStep extends Step implements Serializable {
     this.trustSelfSignedCert = trustSelfSignedCert;
   }
 
-  public String resolveToken() {
-    // If token is specified locally, got get it. Otherwise, try to get it from the global config.
-    if (StringUtils.isNotBlank(token)) {
-      return token;
-    }
-    final String credId = GlobalVRAConfiguration.get().getCredentialId();
-    if (credId == null) {
-      return null;
-    }
-    return SecretHelper.getSecretFor(credId).orElse(null);
+  public String getDomain() {
+    return domain;
+  }
+
+  @DataBoundSetter
+  public void setDomain(final String domain) {
+    this.domain = domain;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  @DataBoundSetter
+  public void setUsername(final String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  @DataBoundSetter
+  public void setPassword(final String password) {
+    this.password = password;
   }
 }

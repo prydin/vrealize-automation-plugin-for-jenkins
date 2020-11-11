@@ -83,6 +83,33 @@ public class DeployFromCatalogStepTest {
   }
 
   @Test
+  public void testConfigRoundTripWithUsername() {
+    rr.then(
+        r -> {
+          final StepConfigTester sct = new StepConfigTester(rr.j);
+          final Map<String, Object> config = getTestConfig();
+          config.put("username", "username");
+          config.put("password", "password");
+          final DescribableModel<DeployFromCatalogStep> model =
+              new DescribableModel<>(DeployFromCatalogStep.class);
+          DeployFromCatalogStep step = model.instantiate(config, StreamTaskListener.fromStderr());
+          step = sct.configRoundTrip(step);
+          assertEquals("vraURL", step.getVraURL());
+          assertEquals("username", step.getUsername());
+          assertEquals("password", step.getPassword());
+          assertEquals("catalogItemName", step.getCatalogItemName());
+          assertEquals("projectName", step.getProjectName());
+          assertEquals("deploymentName", step.getDeploymentName());
+          assertEquals("reason", step.getReason());
+          assertEquals("inputs", step.getInputs());
+          assertEquals("version", step.getVersion());
+          assertEquals(1L, step.getTimeout());
+          assertEquals(42, step.getCount());
+          model.uninstantiate2_(step);
+        });
+  }
+
+  @Test
   public void testJsonConfigRoundTrip() {
     rr.then(
         r -> {

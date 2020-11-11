@@ -14,6 +14,9 @@ useful when you want to read the deployment specification from a file.
 |------|------|-------------|
 | vraUrl | String | URL to the vRealize Automation Instance (optional) |
 | token | String | vRealize Automation API token |
+| username | String | vRealize Automation Username (mutually exclusive with ```token```)
+| password | String | vRealize Automation Password (mutually exclusive with ```token```)
+| domain | String | vRealize Automation authentication domain (mutually exclusive with ```token```)
 | trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | projectName | String | The name of the associated vRealize Automation project |
 | catalogItemName | String | The name of the catalog item to deploy |
