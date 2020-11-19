@@ -78,6 +78,8 @@ public class GlobalConfigurationTest {
               "global config page let us edit it",
               "hello",
               GlobalVRAConfiguration.get().getVraURL());
+          assertEquals(
+              "credential check", "vraToken", GlobalVRAConfiguration.get().getCredentialId());
         });
     rr.then(
         r -> {
