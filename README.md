@@ -1,4 +1,4 @@
-# VMWare vRealize Automation Plugin for Jenkins
+# VMware vRealize Automation Plugin for Jenkins
 
 ## Introduction
 
