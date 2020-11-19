@@ -44,13 +44,54 @@ can start using it.
 You have now deployed a machine and received an IP address for it. You may 
 use it for SSH steps etc.
 
+## Authenicating with vRealize Operations
+There are two authentication mechanism available: API key or username/password. The latter
+only works for on-premises deployments of vRealize Automation and does NOT work for the SaaS
+form factor.
+
+### API token authentication
+A vRealize Automation API token is simply an Oauth refresh token and is typically valid for
+six months. It is obtained in different ways depending on whether you are using the SaaS/Cloud
+form factor or an on-premises deployment of vRealize Automation.
+
+#### vRealize Automation Cloud (SaaS)
+1. Click on the dropdown in the upper right corner (your user name).
+2. Select "My Account"
+3. Select the "API Tokens" tab
+4. Click "Generate Token" and assign the appropriate roles
+5. Make a note of the API token. This is the only time it will be visible!
+
+#### vRealize Automation On-Premises
+The API token isn't available in the UI with the on-premises form factor, but can be
+obtained through a REST call using e.g. cURL:
+
+```bash
+curl --location --request POST 'https://<vRA8.1-URL>/csp/gateway/am/api/login?access_token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"username": "username",
+	"password": "password",
+	"domain": "System Domain | AD Domain"
+}'
+```
+
+The API token is returned in the ```refresh_token``` JSON field of the response.
+
+### Authentication using username/password
+Since the API token isn't readily available in the on-premises form factor, we also
+provide username/password authentication. Please note that this is available *only* for
+the on-premises form factor.
+
+To use username/password authentication, provide the ```username```, ```password``` and
+```domain``` parameters that are available for all steps.
+
 ## Global settings
 This plugin allows you to configure the address of the vRealize Automation environment, 
-the API key, as well as whether Jenkins should accept vRealize Automation Servers with 
-self-signed certificates. This is useful when you're only interacting with a single 
+the API key, as well as username and password if the API key isn't used. This is useful when you're only interacting with a single 
 instance of vRealize Automation and allows you to omit address and credentials from the 
 actual  pipelines. The credentials are configured as a reference to a standard Jenkins 
-string credential.
+string credential or username/password credential (only available for on-premises vRealize
+Automation)
 
 ![Global Settings](docs/img/global_settings.png)
 

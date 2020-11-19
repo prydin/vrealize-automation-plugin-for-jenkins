@@ -26,6 +26,7 @@ package com.vmware.vra.jenkinsplugin;
 
 import com.cloudbees.plugins.credentials.CredentialsMatchers;
 import com.cloudbees.plugins.credentials.CredentialsProvider;
+import com.cloudbees.plugins.credentials.common.StandardCredentials;
 import com.cloudbees.plugins.credentials.common.StandardListBoxModel;
 import com.cloudbees.plugins.credentials.domains.URIRequirementBuilder;
 import hudson.Extension;
@@ -35,7 +36,6 @@ import hudson.util.ListBoxModel;
 import java.io.Serializable;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.Jenkins;
-import org.jenkinsci.plugins.plaincredentials.StringCredentials;
 import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
@@ -48,7 +48,7 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
 
   private String credentialId;
 
-  private boolean trustSelfSignedCert;
+  private String domain;
 
   public GlobalVRAConfiguration() {
     // When Jenkins is restarted, load any saved configuration from disk.
@@ -79,18 +79,13 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
     save();
   }
 
-  public boolean isTrustSelfSignedCert() {
-    return trustSelfSignedCert;
-  }
-
-  public boolean getTrustSelfSignedCert() {
-    return trustSelfSignedCert;
+  public String getDomain() {
+    return domain;
   }
 
   @DataBoundSetter
-  public void setTrustSelfSignedCert(final boolean trustSelfSignedCert) {
-    this.trustSelfSignedCert = trustSelfSignedCert;
-    save();
+  public void setDomain(final String domain) {
+    this.domain = domain;
   }
 
   public ListBoxModel doFillCredentialIdItems(
@@ -108,11 +103,10 @@ public class GlobalVRAConfiguration extends GlobalConfiguration implements Seria
       }
     }
     return result
-        .includeEmptyValue()
         .includeMatchingAs(
             ACL.SYSTEM,
             instance,
-            StringCredentials.class,
+            StandardCredentials.class,
             URIRequirementBuilder.fromUri(getVraURL()).build(),
             CredentialsMatchers.always())
         .includeCurrentValue(credentialId);

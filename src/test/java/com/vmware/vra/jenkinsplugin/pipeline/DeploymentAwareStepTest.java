@@ -66,6 +66,29 @@ public abstract class DeploymentAwareStepTest<T extends DeploymentAwareStep> {
   }
 
   @Test
+  public void testConfigRoundtripWithUsername() {
+    rr.then(
+        r -> {
+          final StepConfigTester sct = new StepConfigTester(rr.j);
+          final Map<String, Object> config = new HashMap<>();
+          config.put("vraURL", "vraURL");
+          config.put("username", "username");
+          config.put("password", "password");
+          config.put("trustSelfSignedCert", true);
+          config.put("deploymentId", "deploymentId");
+          final DescribableModel<T> model = new DescribableModel<>(clazz);
+          T step = model.instantiate(config, StreamTaskListener.fromStderr());
+          step = sct.configRoundTrip(step);
+          assertEquals("vraURL", step.getVraURL());
+          assertEquals("username", step.getUsername());
+          assertEquals("password", step.getPassword());
+          assertEquals("deploymentId", step.getDeploymentId());
+          assertTrue(step.isTrustSelfSignedCert());
+          model.uninstantiate2_(step);
+        });
+  }
+
+  @Test
   public void testConfigRoundtripWithName() {
     rr.then(
         r -> {

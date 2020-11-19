@@ -26,6 +26,7 @@ package com.vmware.vra.jenkinsplugin.pipelines
 
 node {
     def dep = vraDeployFromCatalog(
+            trustSelfSignedCert: true,
             catalogItemName: 'jenkins-test',
             count: 1,
             deploymentName: 'JenkinsProgrammatic-#',
@@ -36,10 +37,22 @@ node {
             inputs: '{ username: \'testuser\' }')
     assert dep != null
     def addr = vraWaitForAddress(
+            trustSelfSignedCert: true,
             deploymentId: dep[0].id,
             resourceName: 'UbuntuMachine')
+
+    // Make sure the deployment can be found using its name
+    // (https://github.com/prydin/vrealize-automation-plugin-for-jenkins/issues/7)
+    def thisDep = vraGetDeployment(
+            trustSelfSignedCert: true,
+            deploymentName: dep[0].name)
+    assert thisDep.id == dep[0].id
+    assert thisDep.name == dep[0].name
+
     echo "Deployed: $dep[0].id, addresses: ${addr[0]}"
-    def dep2 = vraDeleteDeployment(deploymentName: dep[0].name)
+    def dep2 = vraDeleteDeployment(
+            trustSelfSignedCert: true,
+            deploymentName: dep[0].name)
     assert dep2 != null
     assert dep2.id != null
     assert dep2.status == "SUCCESSFUL";

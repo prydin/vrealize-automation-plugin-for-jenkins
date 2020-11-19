@@ -11,6 +11,9 @@ Deletes a deployment and all its resources and waits for the request to complete
 |------|------|-------------|
 | vraUrl | String | URL to the vRealize Automation Instance (optional) |
 | token | String | vRealize Automation API token |
+| username | String | vRealize Automation Username (mutually exclusive with ```token```)
+| password | String | vRealize Automation Password (mutually exclusive with ```token```)
+| domain | String | vRealize Automation authentication domain (mutually exclusive with ```token```)
 | trustSelfSignedCert | Boolean | Trust self-signed certificates (not recommended) |
 | deploymentId | String |The ID of the deployment to delete (mutually exclusive with deploymentName) |
 | deploymentName | String | The name of the deployment to delete (mutually exclusive with deploymentId) |
