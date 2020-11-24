@@ -237,6 +237,6 @@
 
     <scm>
         <tag>vrealize-automation-8-1.1</tag>
-        <url>https://github.com/jenkinsci/vrealize-automation-8-plugin</url>
+        <url>https://github.com/jenkinsci/vrealize-automation-8-plugin.git</url>
     </scm>
 </project>
