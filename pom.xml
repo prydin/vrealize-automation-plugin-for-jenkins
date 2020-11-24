@@ -25,7 +25,7 @@
         <tag>vrealize-automation-8-1.1</tag>
         <url>https://github.com/jenkinsci/${artifactId}-plugin.git</url>
         <connection>scm:git:ssh://git@github.com/jenkinsci/${artifactId}-plugin.git</connection>
-        <!-- developerConnection>scm:git:ssh://git@github.com/jenkinsci/${artifactId}-plugin.git</developerConnection -->
+        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/${artifactId}-plugin.git</developerConnection>
     </scm>
 
     <licenses>
