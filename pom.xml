@@ -8,6 +8,10 @@
         <version>4.4</version>
         <relativePath/>
     </parent>
+    <scm>
+        <tag>vrealize-automation-8-1.1</tag>
+        <url>https://github.com/jenkinsci/vrealize-automation-8-plugin.git</url>
+    </scm>
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>vrealize-automation-8</artifactId>
     <version>1.1</version>
@@ -234,9 +238,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <scm>
-        <tag>vrealize-automation-8-1.1</tag>
-        <url>https://github.com/jenkinsci/vrealize-automation-8-plugin.git</url>
-    </scm>
 </project>
