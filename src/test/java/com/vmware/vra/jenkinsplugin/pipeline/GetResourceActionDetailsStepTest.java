@@ -48,6 +48,6 @@ public class GetResourceActionDetailsStepTest
   @Test
   public void testWithIdAndAllParameters() {
     runConfigRoundtripWithId(
-        rr, MapUtils.mapOf("resourceName", "resourceName", "actionName", "actionName"));
+        rr, MapUtils.mapOf("resourceName", "resourceName", "actionId", "actionId"));
   }
 }

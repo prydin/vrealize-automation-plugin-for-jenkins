@@ -52,7 +52,7 @@
     <f:entry field="resourceName" title="${%Resource Name}">
         <f:textbox/>
     </f:entry>
-    <f:entry field="actionName" title="${%Action Name}">
+    <f:entry field="actionId" title="${%Action Name}">
         <f:textbox/>
     </f:entry>
 </j:jelly>

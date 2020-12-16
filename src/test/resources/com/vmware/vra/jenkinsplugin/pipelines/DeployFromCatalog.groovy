@@ -63,7 +63,7 @@ node {
             token: env.token,
             deploymentId: dep[0].id,
             resourceName: 'UbuntuMachine',
-            actionName: 'Cloud.AWS.EC2.Instance.PowerOff')
+            actionId: 'Cloud.AWS.EC2.Instance.PowerOff')
     assert ra != null
     assert ra.size() == 1
     assert ra[0].name == 'PowerOff'

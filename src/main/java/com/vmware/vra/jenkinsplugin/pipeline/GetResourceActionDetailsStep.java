@@ -40,18 +40,18 @@ import org.kohsuke.stapler.DataBoundSetter;
 public class GetResourceActionDetailsStep extends ResourceAwareStep implements Serializable {
   private static final long serialVersionUID = -362558632587031024L;
 
-  private String actionName;
+  private String actionId;
 
   @DataBoundConstructor
   public GetResourceActionDetailsStep() {}
 
-  public String getActionName() {
-    return actionName;
+  public String getActionId() {
+    return actionId;
   }
 
   @DataBoundSetter
-  public void setActionName(final String actionName) {
-    this.actionName = actionName;
+  public void setActionId(final String actionId) {
+    this.actionId = actionId;
   }
 
   @Override

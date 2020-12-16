@@ -51,7 +51,7 @@ public class GetResourceActionDetailsExecution extends SynchronousNonBlockingSte
     final List<UUID> resIds = step.resolveResourceIds();
     final List<Object> result = new ArrayList<>(resIds.size());
     for (final UUID id : resIds) {
-      result.add(client.getResourceActionDetails(depId, id.toString(), step.getActionName()));
+      result.add(client.getResourceActionDetails(depId, id.toString(), step.getActionId()));
     }
     return MapUtils.mappify(result);
   }
