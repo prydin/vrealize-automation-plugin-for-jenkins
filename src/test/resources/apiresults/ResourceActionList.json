@@ -1,0 +1,146 @@
+[
+  {
+    "id": "Cloud.vSphere.Machine.Add.Disk",
+    "name": "Add.Disk",
+    "displayName": "Add Disk",
+    "description": "Add a disk to the machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Change.SecurityGroup",
+    "name": "Change.SecurityGroup",
+    "displayName": "Change Security Groups",
+    "description": "Change security groups for machine networks",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Remote.Console",
+    "name": "Remote.Console",
+    "displayName": "Connect to Remote Console",
+    "description": "Launch remote console in the browser",
+    "valid": true,
+    "actionType": "RESOURCE_EXTENSION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Snapshot.Create",
+    "name": "Snapshot.Create",
+    "displayName": "Create Snapshot",
+    "description": "Create a snapshot of a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Delete",
+    "name": "Delete",
+    "displayName": "Delete",
+    "description": "Delete a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Snapshot.Delete",
+    "name": "Snapshot.Delete",
+    "displayName": "Delete Snapshot",
+    "description": "Delete a snapshot",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Remote.PrivateKey",
+    "name": "Remote.PrivateKey",
+    "displayName": "Get Private Key",
+    "description": "Get private key for remote access",
+    "valid": false,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.PowerOff",
+    "name": "PowerOff",
+    "displayName": "Power Off",
+    "description": "Power off a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.PowerOn",
+    "name": "PowerOn",
+    "displayName": "Power On",
+    "description": "Power on a machine",
+    "valid": false,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Reboot",
+    "name": "Reboot",
+    "displayName": "Reboot",
+    "description": "Reboot a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Remove.Disk",
+    "name": "Remove.Disk",
+    "displayName": "Remove Disk",
+    "description": "Delete a disk attached to the machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Reset",
+    "name": "Reset",
+    "displayName": "Reset",
+    "description": "Reset a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Resize",
+    "name": "Resize",
+    "displayName": "Resize",
+    "description": "Resize a compute machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Compute.Disk.Resize",
+    "name": "Compute.Disk.Resize",
+    "displayName": "Resize Boot Disk",
+    "description": "Resizing a boot disk",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Snapshot.Revert",
+    "name": "Snapshot.Revert",
+    "displayName": "Revert To Snapshot",
+    "description": "Revert to a snapshot",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Shutdown",
+    "name": "Shutdown",
+    "displayName": "Shutdown",
+    "description": "Shutdown guest OS of machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Suspend",
+    "name": "Suspend",
+    "displayName": "Suspend",
+    "description": "Suspend a machine",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  },
+  {
+    "id": "Cloud.vSphere.Machine.Update.Tags",
+    "name": "Update.Tags",
+    "displayName": "Update Tags",
+    "description": "Update tags of a resource",
+    "valid": true,
+    "actionType": "RESOURCE_ACTION"
+  }
+]

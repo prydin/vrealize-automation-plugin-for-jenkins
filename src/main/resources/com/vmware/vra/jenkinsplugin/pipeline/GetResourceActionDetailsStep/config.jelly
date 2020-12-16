@@ -49,16 +49,10 @@
     <f:entry field="deploymentName" title="${%Deployment Name}">
         <f:textbox/>
     </f:entry>
-    <f:entry field="resourceName" title="${%Resource Name within Blueprint (optional)}">
+    <f:entry field="resourceName" title="${%Resource Name}">
         <f:textbox/>
     </f:entry>
-    <f:entry field="actionId" title="${%Action ID}">
+    <f:entry field="actionName" title="${%Action Name}">
         <f:textbox/>
-    </f:entry>
-    <f:entry field="reason" title="${%Reason}">
-        <f:textarea/>
-    </f:entry>
-    <f:entry field="timeout" title="${%vRealize Automation API Timeout}">
-        <f:number/>
     </f:entry>
 </j:jelly>

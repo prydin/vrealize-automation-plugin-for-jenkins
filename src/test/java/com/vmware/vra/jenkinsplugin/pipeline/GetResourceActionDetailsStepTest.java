@@ -24,19 +24,30 @@
 
 package com.vmware.vra.jenkinsplugin.pipeline;
 
+import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.jvnet.hudson.test.RestartableJenkinsRule;
+import org.mockito.junit.MockitoJUnitRunner;
 
-public class GetDeploymentStepTest extends DeploymentAwareStepTest<GetDeploymentStep> {
+@RunWith(MockitoJUnitRunner.class)
+public class GetResourceActionDetailsStepTest
+    extends DeploymentAwareStepTest<GetResourceActionDetailsStep> {
   @Rule public RestartableJenkinsRule rr = new RestartableJenkinsRule();
 
-  public GetDeploymentStepTest() {
-    super(GetDeploymentStep.class);
+  public GetResourceActionDetailsStepTest() {
+    super(GetResourceActionDetailsStep.class);
   }
 
   @Test
   public void testAllStandardConfigs() {
     runAllStandardConfigs(rr);
+  }
+
+  @Test
+  public void testWithIdAndAllParameters() {
+    runConfigRoundtripWithId(
+        rr, MapUtils.mapOf("resourceName", "resourceName", "actionName", "actionName"));
   }
 }
