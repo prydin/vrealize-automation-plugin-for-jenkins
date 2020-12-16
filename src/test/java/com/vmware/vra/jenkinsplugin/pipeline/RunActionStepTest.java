@@ -45,6 +45,11 @@ public class RunActionStepTest extends DeploymentAwareStepTest<RunActionStep> {
   }
 
   @Test
+  public void testAllStandardConfigs() {
+    runAllStandardConfigs(rr);
+  }
+
+  @Test
   public void testFullConfigRoundtrip() {
     rr.then(
         r -> {

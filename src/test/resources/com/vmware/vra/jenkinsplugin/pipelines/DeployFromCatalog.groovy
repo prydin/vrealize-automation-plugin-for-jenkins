@@ -49,6 +49,26 @@ node {
     assert thisDep.id == dep[0].id
     assert thisDep.name == dep[0].name
 
+    def ras = vraGetResourceActions(
+            vraURL: env.vraURL,
+            token: env.token,
+            deploymentId: dep[0].id,
+            resourceName: 'UbuntuMachine')
+    assert ras != null
+    assert ras.size() == 1
+    assert ras[0].size() > 0
+
+    def ra = vraGetResourceActionDetails(
+            vraURL: env.vraURL,
+            token: env.token,
+            deploymentId: dep[0].id,
+            resourceName: 'UbuntuMachine',
+            actionId: 'Cloud.AWS.EC2.Instance.PowerOff')
+    assert ra != null
+    assert ra.size() == 1
+    assert ra[0].name == 'PowerOff'
+    assert ra[0].id == 'Cloud.AWS.EC2.Instance.PowerOff'
+
     echo "Deployed: $dep[0].id, addresses: ${addr[0]}"
     def dep2 = vraDeleteDeployment(
             trustSelfSignedCert: true,

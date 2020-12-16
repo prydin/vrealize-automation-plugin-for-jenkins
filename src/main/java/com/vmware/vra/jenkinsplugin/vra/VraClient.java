@@ -101,17 +101,12 @@ public class VraClient implements Serializable {
     if (queries == null) {
       return "";
     }
-    queries.put("apiVersion", VraClient.API_VERSION);
-    final StringBuilder s = new StringBuilder("?");
-    boolean amp = false;
+    final StringBuilder s = new StringBuilder("?apiVersion=" + VraClient.API_VERSION);
     for (final Map.Entry<String, String> q : queries.entrySet()) {
-      if (amp) {
-        s.append('&');
-      }
+      s.append('&');
       s.append(q.getKey())
           .append("=")
           .append(URLEncoder.encode(q.getValue(), Charset.defaultCharset().name()));
-      amp = true;
     }
     return s.toString();
   }

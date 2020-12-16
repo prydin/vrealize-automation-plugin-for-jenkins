@@ -99,6 +99,8 @@ Automation)
 * [vraDeleteDeployment - Deleta a deployment and its resources](docs/vraDeleteDeployment.md)
 * [vraDeployFromCatalog - Deploy from a catalog item](docs/vraDeployFromCatalog.md)
 * [vraGetDeployment - Get details about a deployment](docs/vraGetDeployment.md)
+* [vraGetResourceActionDetails - Get detailed metadata for a specific resource action](docs/vraGetResourceActionDetails.md)
+* [vraGetResourceActions - Get summarized metadata all actions of a resource](docs/vraGetResourceActions.md)
 * [vraRunAction - Run a day two operation](docs/vraRunAction.md)
 * [vraWaitForAddress - Wait until a resource has a valid address and return it](docs/vraWaitForAddress.md)
 

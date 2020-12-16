@@ -1,0 +1,213 @@
+{
+  "content": [
+    {
+      "id": "51b1c53f-d982-45aa-88b2-52e1704124a8",
+      "name": "UbuntuMachine[0]",
+      "type": "Cloud.Machine",
+      "createdAt": "2020-12-16T01:37:37.773724Z",
+      "properties": {
+        "resourceId": "51b1c53f-d982-45aa-88b2-52e1704124a8",
+        "externalLink": "https://us-west-1.console.aws.amazon.com/ec2/v2/home?region=us-west-1#Instances:instanceId=i-xxxx;sort=instanceState",
+        "resourceDescLink": "/resources/compute-descriptions/xxxx",
+        "constraints": [
+          {
+            "tag": "env:aws"
+          }
+        ],
+        "powerState": "ON",
+        "zone": "us-west-1c",
+        "environmentName": "Amazon Web Services",
+        "countIndex": "0",
+        "id": "/resources/compute/xxxx",
+        "cpuCount": 1,
+        "image": "prydin-ubuntu-18-dhcp",
+        "totalMemoryMB": 512,
+        "imageId": "ami-013ae179726c206ee",
+        "endpointType": "aws",
+        "count": "1",
+        "resourceName": "prydin-020574",
+        "tags": [
+          {
+            "key": "costcenter",
+            "value": "1234"
+          }
+        ],
+        "rootDeviceType": "ebs",
+        "flavor": "prydin-tiny",
+        "name": "UbuntuMachine",
+        "flavorRef": "t2.nano",
+        "folderName": "",
+        "resourceLink": "/resources/compute/51b1c53f-d982-45aa-88b2-52e1704124a8",
+        "region": "us-west-1",
+        "storage": {
+          "disks": [
+            {
+              "name": "prydin-020574-boot-disk",
+              "type": "HDD",
+              "service": "ebs",
+              "regionId": "us-west-1",
+              "bootOrder": 1,
+              "encrypted": false,
+              "capacityGb": 8,
+              "deviceName": "/dev/sda1",
+              "deviceType": "ebs",
+              "persistent": false,
+              "volumeType": "gp2",
+              "endpointType": "aws",
+              "SourceTaskLink": "/provisioning/requests/counter-subtasks"
+            },
+            {
+              "iops": "100",
+              "name": "prydin-020574-boot-disk",
+              "type": "SSD",
+              "service": "ebs",
+              "bootOrder": 1,
+              "encrypted": false,
+              "capacityGb": 8,
+              "deviceName": "/dev/sda1",
+              "snapshotId": "snap-029faa15de4af25fc",
+              "volumeType": "gp2",
+              "endpointType": "aws",
+              "SourceTaskLink": "/provisioning/resource-enumeration-tasks"
+            }
+          ]
+        },
+        "networks": [
+          {
+            "id": "/resources/network-interfaces/432e486a-ed43-4fbc-a146-251bf530ddca",
+            "name": "subnet-e6e0c3a0",
+            "address": "172.31.9.135",
+            "assignment": "dynamic",
+            "deviceIndex": 0,
+            "resourceName": "subnet-e6e0c3a0",
+            "securityGroupNames": [
+              "photon-model-sg"
+            ]
+          }
+        ],
+        "_clusterAllocationSize": "1",
+        "providerId": "i-02720ebed31e9c7d6",
+        "osType": "LINUX",
+        "enableSSH": "true",
+        "resourcePool": "/resources/pools/1a6dbdc51d094075-7f703c5265a63d87",
+        "componentType": "Cloud.AWS.EC2.Instance",
+        "awsVpcId": "vpc-26100944",
+        "address": "52.53.189.83",
+        "endpointId": "1a6dbdc51d094075-7f703c5265a63d87-5e83bd3414ab3d6b81123e12680a98be5b98ddf96cb8462e80af044db243d44d-f0d19494e4268275575b270398e90",
+        "SourceTaskLink": "/provisioning/resource-enumeration-tasks",
+        "service": "ec2",
+        "flavorMappingName": "prydin-tiny",
+        "account": "Pontus AWS Account",
+        "username": "demouser"
+      },
+      "syncStatus": "SUCCESS",
+      "state": "OK"
+    },
+    {
+      "id": "53ed0727-f9f1-46f4-8f17-22aa2ec2c259",
+      "name": "Cloud_Network_1",
+      "type": "Cloud.Network",
+      "createdAt": "2020-12-16T01:37:32.602847Z",
+      "properties": {
+        "resourceId": "53ed0727-f9f1-46f4-8f17-22aa2ec2c259",
+        "resourceDescLink": "/provisioning/resources/compute-network-descriptions/6a5446e2-dd8e-44a3-a220-0edae5aa05e0",
+        "networkCidr": "172.31.16.0/20",
+        "prefixLength": "20",
+        "netmask": "255.255.240.0",
+        "providerId": "8a7f6db5-0152-4083-9742-b56f24e7424c",
+        "id": "/provisioning/resources/compute-networks/53ed0727-f9f1-46f4-8f17-22aa2ec2c259",
+        "networkType": "existing",
+        "endpointType": "aws",
+        "endpointId": "1a6dbdc51d094075-7f703c5265a63d87-5e83bd3414ab3d6b81123e12680a98be5b98ddf96cb8462e80af044db243d44d-f0d19494e4268275575b270398e90",
+        "resourceName": "subnet-c4ce2ea1",
+        "name": "Cloud_Network_1",
+        "resourceLink": "/provisioning/resources/compute-networks/53ed0727-f9f1-46f4-8f17-22aa2ec2c259",
+        "account": "Pontus AWS Account"
+      },
+      "syncStatus": "SUCCESS",
+      "state": "OK"
+    },
+    {
+      "id": "3af3f89a-0702-476a-8ef5-afeb02fc92ee",
+      "name": "Cloud_SecurityGroup_1",
+      "type": "Cloud.SecurityGroup",
+      "createdAt": "2020-12-16T01:37:31.280242Z",
+      "properties": {
+        "resourceId": "3af3f89a-0702-476a-8ef5-afeb02fc92ee",
+        "resourceDescLink": "/provisioning/resources/compute-security-group-descriptions/b8d7b315-c005-44bb-a1df-6f0d29727987",
+        "rules": [],
+        "constraints": [
+          {
+            "tag": "allow:ssh"
+          }
+        ],
+        "securityGroupLink": "/resources/security-groups/584e8171-ff78-4011-99c7-9dd7273be719",
+        "securityGroupType": "EXISTING",
+        "providerId": "5809994e-96ab-431c-a29a-e62eba513a54",
+        "id": "/provisioning/resources/compute-security-groups/3af3f89a-0702-476a-8ef5-afeb02fc92ee",
+        "endpointType": "aws",
+        "endpointId": "1a6dbdc51d094075-7f703c5265a63d87-5e83bd3414ab3d6b81123e12680a98be5b98ddf96cb8462e80af044db243d44d-f0d19494e4268275575b270398e90",
+        "resourceName": "Allow SSH",
+        "name": "SSH access",
+        "resourceLink": "/provisioning/resources/compute-security-groups/3af3f89a-0702-476a-8ef5-afeb02fc92ee",
+        "account": "Pontus AWS Account"
+      },
+      "syncStatus": "SUCCESS",
+      "state": "OK"
+    }
+  ],
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "queryInfo": {
+      "orderBy": [
+        {
+          "expression": {
+            "propertyName": "type"
+          },
+          "direction": "ASCENDING"
+        },
+        {
+          "expression": {
+            "propertyName": "name"
+          },
+          "direction": "ASCENDING"
+        }
+      ],
+      "customOptions": {},
+      "expand": [],
+      "select": [],
+      "rawOrderBy": "type, name asc",
+      "properties": [
+        "name",
+        "type"
+      ],
+      "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+      }
+    },
+    "pageNumber": 0,
+    "pageSize": 20,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 3,
+  "totalPages": 1,
+  "last": true,
+  "first": true,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "size": 20,
+  "number": 0,
+  "numberOfElements": 3,
+  "empty": false
+}

@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.jvnet.hudson.test.RestartableJenkinsRule;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -35,5 +36,10 @@ public class DeleteDeploymentStepTest extends DeploymentAwareStepTest<DeleteDepl
 
   public DeleteDeploymentStepTest() {
     super(DeleteDeploymentStep.class);
+  }
+
+  @Test
+  public void testAllStandardConfigs() {
+    runAllStandardConfigs(rr);
   }
 }

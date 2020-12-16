@@ -1,0 +1,42 @@
+{
+  "id": "Cloud.vSphere.Machine.Snapshot.Revert",
+  "name": "Snapshot.Revert",
+  "displayName": "Revert To Snapshot",
+  "description": "Revert to a snapshot",
+  "schema": {
+    "type": "object",
+    "title": "Revert or delete snapshot",
+    "description": "Request schema for revert or deleting a snapshot of a machine",
+    "properties": {
+      "snapshotId": {
+        "type": "string",
+        "title": "Select Snapshot",
+        "description": "Select a snapshot to revert.",
+        "oneOf": [
+          {
+            "title": "my snapshot (2020-12-14T17:46:32.474Z)",
+            "description": "description - my snapshot",
+            "const": "/resources/snapshots/48eaadb8-b93b-451d-a147-ca0e440247c5"
+          },
+          {
+            "title": "test (2020-12-14T17:21:59.581Z)",
+            "description": "description - test",
+            "const": "/resources/snapshots/63e32c2d-e2a0-464c-918b-7a31f41828a1"
+          },
+          {
+            "title": "a handy dandy snapshot (2020-12-14T17:32:15.042Z)",
+            "description": "description - a handy dandy snapshot",
+            "const": "/resources/snapshots/ecf006d7-3e15-4d46-b85d-6c1b4e3229c1"
+          }
+        ],
+        "minLength": 1
+      }
+    },
+    "required": [
+      "snapshotId"
+    ]
+  },
+  "dependents": [],
+  "valid": true,
+  "actionType": "RESOURCE_ACTION"
+}
