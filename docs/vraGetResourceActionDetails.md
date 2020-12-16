@@ -22,7 +22,7 @@ Returns detailed information about a resource action
 
 ### Return value
 Returns a list of detailed resource action metadata. Since the resource name could match
-multiple instance of a resource, the return value is an array,
+multiple instance of a resource, the return value is an array.
 
 ### vRealize Automation URL and token
 If the ```vraURL``` or ```token``` parameters are not specified, they are obtained from the 
