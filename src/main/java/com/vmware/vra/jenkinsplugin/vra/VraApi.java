@@ -155,7 +155,6 @@ public class VraApi implements Serializable {
           if (dep == null) {
             throw new IllegalArgumentException("Deployment doesn't exist: " + deploymentId);
           }
-          final List<Resource> resources = dep.getResources();
           final List<String> result = new ArrayList<>(dep.getResources().size());
           boolean missingAddress = false;
           boolean missingResource = true;
