@@ -96,7 +96,7 @@ Automation)
 ![Global Settings](docs/img/global_settings.png)
 
 ## Available pipeline steps
-* [vraDeleteDeployment - Deleta a deployment and its resources](docs/vraDeleteDeployment.md)
+* [vraDeleteDeployment - Delete a deployment and its resources](docs/vraDeleteDeployment.md)
 * [vraDeployFromCatalog - Deploy from a catalog item](docs/vraDeployFromCatalog.md)
 * [vraGetDeployment - Get details about a deployment](docs/vraGetDeployment.md)
 * [vraRunAction - Run a day two operation](docs/vraRunAction.md)
