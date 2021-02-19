@@ -3,7 +3,7 @@
 This is a list of common day 2 operation action IDs. Please notice that other 
 actions may be available depending on the type of resources you deploy.
 
-### Actions affecing the entire deployment
+### Actions affecting the entire deployment
 * Deployment.ChangeLease
 * Deployment.Delete
 * Deployment.EditTags
