@@ -45,6 +45,11 @@ public class WaitForAddressStepTest extends DeploymentAwareStepTest<WaitForAddre
   }
 
   @Test
+  public void testAllStandardConfigs() {
+    runAllStandardConfigs(rr);
+  }
+
+  @Test
   public void configRoundTrip() {
     rr.then(
         r -> {

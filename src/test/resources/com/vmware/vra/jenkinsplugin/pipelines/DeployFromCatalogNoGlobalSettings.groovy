@@ -43,6 +43,7 @@ node {
             deploymentId: dep[0].id,
             resourceName: 'UbuntuMachine')
     echo "Deployed: $dep[0].id, addresses: $addr"
+
     def dep2 = vraDeleteDeployment(
             vraURL: env.vraURL,
             token: env.token,

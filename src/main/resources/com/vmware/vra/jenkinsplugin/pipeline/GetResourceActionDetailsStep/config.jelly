@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
 <!--
   ~ Copyright (c) 2020 VMware, Inc
   ~
@@ -22,6 +24,35 @@
   ~ SOFTWARE.
   -->
 
-<div>
-    Returns the details of a resource action.
-</div>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:entry field="vraURL" title="${%vRealize Automation API URL}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="token" title="${%API Token}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="domain" title="${%vRealize Automation login domain}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="username" title="${%vRealize Automation username}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="password" title="${%vRealize Automation password}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="trustSelfSignedCert" title="${%Trust Self-Signed Certificate (not recommended)}">
+        <f:checkbox/>
+    </f:entry>
+    <f:entry field="deploymentId" title="${%Deployment ID}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="deploymentName" title="${%Deployment Name}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="resourceName" title="${%Resource Name}">
+        <f:textbox/>
+    </f:entry>
+    <f:entry field="actionId" title="${%Action Name}">
+        <f:textbox/>
+    </f:entry>
+</j:jelly>

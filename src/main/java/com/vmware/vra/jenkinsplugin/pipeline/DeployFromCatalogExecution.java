@@ -24,7 +24,6 @@
 
 package com.vmware.vra.jenkinsplugin.pipeline;
 
-import static com.vmware.vra.jenkinsplugin.util.JSONUtils.fromJson;
 import static com.vmware.vra.jenkinsplugin.util.JSONUtils.fromJsonToMap;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
@@ -84,10 +83,14 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
       }
       final Config c;
       if (step.getConfigFormat().toLowerCase().equals("json")) {
-        c = fromJson(config, Config.class);
+        // c = fromJson(config, Config.class);
+        // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+        c = loadFromJsonWorkaround(config);
       } else if (step.getConfigFormat().toLowerCase().equals("yaml")) {
-        final Yaml y = new Yaml();
-        c = y.loadAs(config, Config.class);
+        // final Yaml y = new Yaml();
+        // c = y.loadAs(config, Config.class);
+        // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+        c = loadFromYamlWorkaround(config);
       } else {
         throw new IllegalArgumentException("configFormat must be either 'json' or 'yaml'");
       }
@@ -125,6 +128,50 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
     }
     log.println("All deployments finished!");
     return MapUtils.mappify(deps);
+  }
+
+  // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+  private static Config loadFromJsonWorkaround(final String content) {
+    final Map<String, Object> map = fromJsonToMap(content);
+    return buildConfigFromMap(map);
+  }
+
+  // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+  private static Config loadFromYamlWorkaround(final String content) {
+    final Yaml y = new Yaml();
+    return buildConfigFromMap(y.loadAs(content, Map.class));
+  }
+
+  // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+  private static Config buildConfigFromMap(final Map<String, Object> map) {
+    final Config c = new Config();
+    c.catalogItemName = toString(map.get("catalogItemName"));
+    c.count = toInt(map.get("count"));
+    c.deploymentName = toString(map.get("deploymentName"));
+    c.inputs = (Map<String, Object>) map.get("inputs");
+    c.projectName = toString(map.get("projectName"));
+    c.reason = toString(map.get("reason"));
+    c.version = toString(map.get("version"));
+    return c;
+  }
+
+  // Workaround for https://issues.jenkins.io/browse/JENKINS-64498. Remove when fixed!
+  private static String toString(final Object o) {
+    if (o == null) {
+      return "";
+    }
+    return o.toString();
+  }
+
+  private static int toInt(final Object o) {
+    if (o instanceof Number) {
+      return ((Number) o).intValue();
+    }
+    if (o instanceof String) {
+      return Integer.parseInt((String) o);
+    }
+    throw new IllegalArgumentException(
+        "Object of class " + o.getClass().getName() + " cannot be converted to int");
   }
 
   public static final class Config { // Must be public due to SnakeYAML access

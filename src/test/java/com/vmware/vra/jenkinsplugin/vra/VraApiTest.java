@@ -42,6 +42,7 @@ import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequest;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequestResponse;
 import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItem;
+import com.vmware.vra.jenkinsplugin.model.catalog.ResourceAction;
 import com.vmware.vra.jenkinsplugin.model.catalog.ResourceActionRequest;
 import com.vmware.vra.jenkinsplugin.model.deployment.DeploymentRequest;
 import com.vmware.vra.jenkinsplugin.model.iaas.Project;
@@ -62,6 +63,8 @@ public class VraApiTest {
   private static final String deploymentId = "17a6f622-2022-4482-bfb7-6fa889dabaa5";
   private static final String version = "2";
   private static final String resourceName = "UbuntuMachine";
+  private static final String actionName = "Cloud.vSphere.Machine.Snapshot.Revert";
+  private static final String shortActionName = "Snapshot.Revert";
   private static final Pattern ipPattern =
       Pattern.compile(
           "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
@@ -150,6 +153,75 @@ public class VraApiTest {
     assertEquals(catalogItemName, ci.getName());
     verify(mocked, times(1))
         .get(eq("/catalog/api/items/" + catalogItemId), any(), eq(CatalogItem.class));
+  }
+
+  @Test
+  public void testGetResourceActionDetailsMocked() throws Exception {
+    final Gson gson = new Gson();
+    final ResourceAction wanted =
+        gson.fromJson(
+            FileUtils.loadResource("/apiresults/ResourceAction.json"), ResourceAction.class);
+    final VraClient mocked = mock(VraClient.class);
+    when(mocked.get(
+            eq(
+                "/deployment/api/deployments/"
+                    + deploymentId
+                    + "/resources/"
+                    + resourceName
+                    + "/actions/"
+                    + actionName),
+            any(),
+            eq(ResourceAction.class)))
+        .thenReturn(wanted);
+    final VraApi client = new VraApi(mocked);
+    final ResourceAction ra =
+        client.getResourceActionDetails(deploymentId, resourceName, actionName);
+    verify(mocked, times(1))
+        .get(
+            eq(
+                "/deployment/api/deployments/"
+                    + deploymentId
+                    + "/resources/"
+                    + resourceName
+                    + "/actions/"
+                    + actionName),
+            any(),
+            eq(ResourceAction.class));
+    assertNotNull(ra);
+    assertEquals(shortActionName, ra.getName());
+  }
+
+  @Test
+  public void testGetResourceActionsMocked() throws Exception {
+    final Gson gson = new Gson();
+    final ResourceAction[] wanted =
+        gson.fromJson(
+            FileUtils.loadResource("/apiresults/ResourceActionList.json"), ResourceAction[].class);
+    final VraClient mocked = mock(VraClient.class);
+    when(mocked.get(
+            eq(
+                "/deployment/api/deployments/"
+                    + deploymentId
+                    + "/resources/"
+                    + resourceName
+                    + "/actions"),
+            any(),
+            eq(ResourceAction[].class)))
+        .thenReturn(wanted);
+    final VraApi client = new VraApi(mocked);
+    final ResourceAction[] ra = client.getResourceActions(deploymentId, resourceName);
+    verify(mocked, times(1))
+        .get(
+            eq(
+                "/deployment/api/deployments/"
+                    + deploymentId
+                    + "/resources/"
+                    + resourceName
+                    + "/actions"),
+            any(),
+            eq(ResourceAction[].class));
+    assertNotNull(ra);
+    assertEquals(18, ra.length);
   }
 
   @Test

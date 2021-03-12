@@ -25,12 +25,10 @@
 package com.vmware.vra.jenkinsplugin.pipeline;
 
 import com.google.common.collect.ImmutableSet;
-import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.TaskListener;
 import java.io.Serializable;
-import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
@@ -39,50 +37,13 @@ import org.jenkinsci.plugins.workflow.steps.StepExecution;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 
-public class RunActionStep extends ResourceAwareStep implements Serializable, StepWithInputs {
-  private static final long serialVersionUID = 7632401023113802055L;
-
-  private String inputs;
-
-  private Map<String, Object> inputMap;
+public class GetResourceActionDetailsStep extends ResourceAwareStep implements Serializable {
+  private static final long serialVersionUID = -362558632587031024L;
 
   private String actionId;
 
-  private String reason;
-
-  private long timeout = 300;
-
   @DataBoundConstructor
-  public RunActionStep() {}
-
-  @Override
-  public String getInputs() {
-    return inputs;
-  }
-
-  @DataBoundSetter
-  public void setInputs(final String inputs) {
-    this.inputs = inputs;
-  }
-
-  public long getTimeout() {
-    return timeout;
-  }
-
-  @DataBoundSetter
-  public void setTimeout(final long timeout) {
-    this.timeout = timeout;
-  }
-
-  @Override
-  public Map<String, Object> getInputMap() {
-    return inputMap;
-  }
-
-  @DataBoundSetter
-  public void setInputMap(final Map<String, Object> inputMap) {
-    this.inputMap = inputMap;
-  }
+  public GetResourceActionDetailsStep() {}
 
   public String getActionId() {
     return actionId;
@@ -93,23 +54,9 @@ public class RunActionStep extends ResourceAwareStep implements Serializable, St
     this.actionId = actionId;
   }
 
-  public String getReason() {
-    return reason;
-  }
-
-  @DataBoundSetter
-  public void setReason(final String reason) {
-    this.reason = reason;
-  }
-
   @Override
   public StepExecution start(final StepContext stepContext) throws Exception {
-    return new RunActionExecution(stepContext, this);
-  }
-
-  @Override
-  public Map<String, Object> resolveInputs() {
-    return MapUtils.resolveFromStep(this);
+    return new GetResourceActionDetailsExecution(stepContext, this);
   }
 
   @Extension
@@ -124,13 +71,13 @@ public class RunActionStep extends ResourceAwareStep implements Serializable, St
 
     @Override
     public String getFunctionName() {
-      return "vraRunAction";
+      return "vraGetResourceActionDetails";
     }
 
     @Override
     @Nonnull
     public String getDisplayName() {
-      return "vRA - Run Action";
+      return "vRA - Get Resource Action Details";
     }
   }
 }

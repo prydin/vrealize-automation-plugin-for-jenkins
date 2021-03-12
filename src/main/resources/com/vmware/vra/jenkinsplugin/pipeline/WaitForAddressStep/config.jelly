@@ -46,6 +46,9 @@
     <f:entry field="deploymentId" title="${%Deployment ID}">
         <f:textbox/>
     </f:entry>
+    <f:entry field="deploymentName" title="${%Deployment Name}">
+        <f:textbox/>
+    </f:entry>
     <f:entry field="resourceName" title="${%Resource Name within Blueprint}">
         <f:textbox/>
     </f:entry>

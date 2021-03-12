@@ -40,6 +40,7 @@ import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItem;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfDeployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfResource;
 import com.vmware.vra.jenkinsplugin.model.catalog.Resource;
+import com.vmware.vra.jenkinsplugin.model.catalog.ResourceAction;
 import com.vmware.vra.jenkinsplugin.model.catalog.ResourceActionRequest;
 import com.vmware.vra.jenkinsplugin.model.deployment.DeploymentRequest;
 import com.vmware.vra.jenkinsplugin.model.iaas.Project;
@@ -154,7 +155,6 @@ public class VraApi implements Serializable {
           if (dep == null) {
             throw new IllegalArgumentException("Deployment doesn't exist: " + deploymentId);
           }
-          final List<Resource> resources = dep.getResources();
           final List<String> result = new ArrayList<>(dep.getResources().size());
           boolean missingAddress = false;
           boolean missingResource = true;
@@ -352,5 +352,27 @@ public class VraApi implements Serializable {
     return getResourcesForDeployment(deploymentId).stream()
         .filter((r) -> r.getName().equals(resourceName))
         .collect(Collectors.toList());
+  }
+
+  public ResourceAction getResourceActionDetails(
+      final String deploymentId, final String resourceId, final String actionName)
+      throws VRAException {
+    return vraClient.get(
+        "/deployment/api/deployments/"
+            + deploymentId
+            + "/resources/"
+            + resourceId
+            + "/actions/"
+            + actionName,
+        Collections.EMPTY_MAP,
+        ResourceAction.class);
+  }
+
+  public ResourceAction[] getResourceActions(final String deploymentId, final String resourceId)
+      throws VRAException {
+    return vraClient.get(
+        "/deployment/api/deployments/" + deploymentId + "/resources/" + resourceId + "/actions",
+        Collections.EMPTY_MAP,
+        ResourceAction[].class);
   }
 }

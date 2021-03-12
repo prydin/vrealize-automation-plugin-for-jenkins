@@ -24,19 +24,35 @@
 
 package com.vmware.vra.jenkinsplugin.pipeline;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.jvnet.hudson.test.RestartableJenkinsRule;
+import com.vmware.vra.jenkinsplugin.util.MapUtils;
+import com.vmware.vra.jenkinsplugin.vra.VraApi;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.jenkinsci.plugins.workflow.steps.StepContext;
+import org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution;
 
-public class GetDeploymentStepTest extends DeploymentAwareStepTest<GetDeploymentStep> {
-  @Rule public RestartableJenkinsRule rr = new RestartableJenkinsRule();
+public class GetResourceActionDetailsExecution extends SynchronousNonBlockingStepExecution<Object> {
 
-  public GetDeploymentStepTest() {
-    super(GetDeploymentStep.class);
+  private static final long serialVersionUID = -367137360179308720L;
+  private final GetResourceActionDetailsStep step;
+
+  public GetResourceActionDetailsExecution(
+      final StepContext context, final GetResourceActionDetailsStep step) {
+    super(context);
+    this.step = step;
   }
 
-  @Test
-  public void testAllStandardConfigs() {
-    runAllStandardConfigs(rr);
+  @Override
+  protected Object run() throws Exception {
+    final VraApi client = step.getClient();
+    step.validate();
+    final String depId = step.resolveDeploymentId();
+    final List<UUID> resIds = step.resolveResourceIds();
+    final List<Object> result = new ArrayList<>(resIds.size());
+    for (final UUID id : resIds) {
+      result.add(client.getResourceActionDetails(depId, id.toString(), step.getActionId()));
+    }
+    return MapUtils.mappify(result);
   }
 }

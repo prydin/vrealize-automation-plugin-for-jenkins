@@ -26,15 +26,13 @@ package com.vmware.vra.jenkinsplugin.pipeline;
 
 import static com.vmware.vra.jenkinsplugin.util.MapUtils.mappify;
 
-import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
-import com.vmware.vra.jenkinsplugin.model.catalog.Resource;
 import com.vmware.vra.jenkinsplugin.model.deployment.DeploymentRequest;
 import com.vmware.vra.jenkinsplugin.util.MapUtils;
 import com.vmware.vra.jenkinsplugin.vra.VraApi;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
@@ -67,20 +65,13 @@ public class RunActionExecution extends SynchronousNonBlockingStepExecution<Obje
     }
 
     // Resource name was specified. Run action against all matching resources.
-    final Deployment dep = client.getCatalogDeploymentById(step.resolveDeploymentId(), true);
-    if (dep == null) {
-      throw new IllegalArgumentException("Deployment does not exist: " + step.getDeploymentId());
-    }
-    final Pattern resourcePattern = VraApi.getResourcePattern(resourceName);
-    final List<DeploymentRequest> drs = new ArrayList<>();
-    for (final Resource r : dep.getResources()) {
-      if (!resourcePattern.matcher(r.getName()).matches()) {
-        continue;
-      }
+    final List<UUID> resourceIds = step.resolveResourceIds();
+    final List<DeploymentRequest> drs = new ArrayList<>(resourceIds.size());
+    for (final UUID id : resourceIds) {
       drs.add(
           client.submitResourceAction(
               step.resolveDeploymentId(),
-              r.getId().toString(),
+              id.toString(),
               step.getActionId(),
               step.getReason(),
               step.resolveInputs()));

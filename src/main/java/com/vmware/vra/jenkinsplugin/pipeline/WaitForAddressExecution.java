@@ -43,6 +43,6 @@ public class WaitForAddressExecution extends SynchronousNonBlockingStepExecution
   protected List<String> run() throws Exception {
     final VraApi client = step.getClient();
     return client.waitForIPAddresses(
-        step.getDeploymentId(), step.getResourceName(), step.getTimeout() * 1000);
+        step.resolveDeploymentId(), step.getResourceName(), step.getTimeout() * 1000);
   }
 }
