@@ -28,7 +28,7 @@ node {
     def config = """
 {
   "catalogItemName": "jenkins-test",
-  "version": "2",
+  "version": "6",
   "projectName": "JenkinsTest",
   "deploymentName": "JenkinsFromJson-#",
   "inputs": {

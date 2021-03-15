@@ -27,7 +27,7 @@ package com.vmware.vra.jenkinsplugin.pipelines
 node {
     def config = """
 "catalogItemName": "jenkins-test"
-"version": "3"
+"version": "6"
 "projectName": "JenkinsTest"
 "deploymentName": "JenkinsFromYaml-#"
 "inputs": 
@@ -43,7 +43,7 @@ node {
             deploymentId: dep[0].id,
             resourceName: 'UbuntuMachine')
     echo "Deployed: $dep[0].id, addresses: $addr"
-    
+
     // Power off the machine
     def dep2 = vraRunAction(
             deploymentId: dep[0].id,
