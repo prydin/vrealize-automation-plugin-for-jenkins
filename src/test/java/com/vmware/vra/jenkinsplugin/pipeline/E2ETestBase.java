@@ -8,6 +8,7 @@ import com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.vmware.vra.jenkinsplugin.testutils.FileUtils;
+import com.vmware.vra.jenkinsplugin.testutils.HTMLUtils;
 import hudson.util.Secret;
 import org.jenkinsci.plugins.plaincredentials.StringCredentials;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
@@ -42,7 +43,7 @@ public class E2ETestBase {
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput textbox = config.getInputByName("_.vraURL");
           textbox.setText(url);
-          config.getSelectByName("_.credentialId").setSelectedIndex(1);
+          HTMLUtils.setNamedOption(config.getSelectByName("_.credentialId"), "vraToken");
           r.submit(config);
 
           final String pipeline = FileUtils.loadResource(name);
@@ -81,7 +82,7 @@ public class E2ETestBase {
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput vraUrl = config.getInputByName("_.vraURL");
           vraUrl.setText(url);
-          config.getSelectByName("_.credentialId").setSelectedIndex(1);
+          HTMLUtils.setNamedOption(config.getSelectByName("_.credentialId"), "vraCredentials");
           r.submit(config);
 
           final String pipeline = FileUtils.loadResource(name);

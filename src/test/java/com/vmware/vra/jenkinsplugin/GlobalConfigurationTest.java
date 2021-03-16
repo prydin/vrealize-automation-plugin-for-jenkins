@@ -33,6 +33,7 @@ import com.cloudbees.plugins.credentials.domains.Domain;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.vmware.vra.jenkinsplugin.testutils.HTMLUtils;
 import hudson.util.Secret;
 import org.jenkinsci.plugins.plaincredentials.StringCredentials;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
@@ -70,7 +71,8 @@ public class GlobalConfigurationTest {
           final HtmlForm config = r.createWebClient().goTo("configure").getFormByName("config");
           final HtmlTextInput textbox = config.getInputByName("_.vraURL");
           final HtmlSelect credential = config.getSelectByName("_.credentialId");
-          credential.setSelectedIndex(1);
+
+          HTMLUtils.setNamedOption(credential, "vraToken");
           textbox.setText("hello");
 
           r.submit(config);
