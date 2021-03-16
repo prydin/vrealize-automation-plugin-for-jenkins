@@ -25,6 +25,7 @@
 package com.vmware.vra.jenkinsplugin.pipelines
 
 node {
+    // Version omitted. Should pick latest.
     def dep = vraDeployFromCatalog(
             trustSelfSignedCert: true,
             catalogItemName: 'jenkins-test',
@@ -33,7 +34,6 @@ node {
             projectName: 'JenkinsTest',
             reason: 'Test',
             timeout: 300,
-            version: '6',
             inputs: '{ username: \'testuser\' }')
     assert dep != null
     def addr = vraWaitForAddress(

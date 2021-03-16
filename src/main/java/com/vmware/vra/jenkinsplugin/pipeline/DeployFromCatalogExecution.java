@@ -97,7 +97,7 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
       response =
           client.deployFromCatalog(
               ValueCheckers.notBlank(c.getCatalogItemName(), "catalogItemName"),
-              ValueCheckers.notBlank(c.getVersion(), "version"),
+              c.getVersion(),
               ValueCheckers.notBlank(c.getProjectName(), "projectName"),
               processDeploymentName(c.getDeploymentName()),
               c.getReason(),
@@ -108,7 +108,7 @@ public class DeployFromCatalogExecution extends SynchronousNonBlockingStepExecut
       response =
           client.deployFromCatalog(
               ValueCheckers.notBlank(step.getCatalogItemName(), "catalogItemName"),
-              ValueCheckers.notBlank(step.getVersion(), "version"),
+              step.getVersion(),
               ValueCheckers.notBlank(step.getProjectName(), "projectName"),
               processDeploymentName(step.getDeploymentName()),
               step.getReason(),

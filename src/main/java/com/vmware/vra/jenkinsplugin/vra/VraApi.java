@@ -35,8 +35,10 @@ import com.google.common.cache.LoadingCache;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItem;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequest;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequestResponse;
+import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemVersion;
 import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItem;
+import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItemVersion;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfDeployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfResource;
 import com.vmware.vra.jenkinsplugin.model.catalog.Resource;
@@ -128,6 +130,16 @@ public class VraApi implements Serializable {
     return content.stream().filter((c) -> c.getName().equals(name)).findFirst().orElse(null);
   }
 
+  public CatalogItemVersion getLatestCatalogItemVersion(final String id) throws VRAException {
+    final PageOfCatalogItemVersion page =
+        vraClient.get(
+            "/catalog/api/items/" + id + "/versions",
+            mapOf("size", "1"),
+            PageOfCatalogItemVersion.class);
+    checkResponseSingleton(page.getContent());
+    return page.getContent().size() > 0 ? page.getContent().get(0) : null;
+  }
+
   public Project getProjectByName(final String name) throws VRAException {
     final ProjectResult projs =
         vraClient.get(
@@ -196,7 +208,8 @@ public class VraApi implements Serializable {
     cir.setBulkRequestCount(count);
     cir.setDeploymentName(deploymentName);
     cir.setProjectId(proj.getId());
-    cir.setVersion(version);
+    cir.setVersion( // Get latest version if not specified
+        version != null ? version : getLatestCatalogItemVersion(ci.getId().toString()).getId());
     cir.setReason(reason);
     cir.setInputs(inputs != null ? inputs : Collections.EMPTY_MAP);
     return vraClient.post(

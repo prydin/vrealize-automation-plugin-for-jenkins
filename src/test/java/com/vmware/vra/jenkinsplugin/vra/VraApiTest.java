@@ -40,8 +40,10 @@ import com.google.gson.Gson;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItem;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequest;
 import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemRequestResponse;
+import com.vmware.vra.jenkinsplugin.model.catalog.CatalogItemVersion;
 import com.vmware.vra.jenkinsplugin.model.catalog.Deployment;
 import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItem;
+import com.vmware.vra.jenkinsplugin.model.catalog.PageOfCatalogItemVersion;
 import com.vmware.vra.jenkinsplugin.model.catalog.ResourceAction;
 import com.vmware.vra.jenkinsplugin.model.catalog.ResourceActionRequest;
 import com.vmware.vra.jenkinsplugin.model.deployment.DeploymentRequest;
@@ -281,6 +283,38 @@ public class VraApiTest {
     assertNotNull(proj);
     assertEquals(projectName, proj.getName());
     verify(mocked, times(1)).get(eq("/iaas/api/projects/" + projectId), any(), eq(Project.class));
+  }
+
+  @Test
+  public void testGetLatestVersionMocked() throws Exception {
+    final Gson gson = new Gson();
+    final PageOfCatalogItemVersion wanted =
+        gson.fromJson(
+            FileUtils.loadResource("/apiresults/PageOfCatalogItemVersion.json"),
+            PageOfCatalogItemVersion.class);
+    final VraClient mocked = mock(VraClient.class);
+    when(mocked.get(
+            eq("/catalog/api/items/" + catalogItemId + "/versions"),
+            any(),
+            eq(PageOfCatalogItemVersion.class)))
+        .thenReturn(wanted);
+    final VraApi client = new VraApi(mocked);
+    final CatalogItemVersion v = client.getLatestCatalogItemVersion(catalogItemId);
+    assertNotNull(v);
+    assertEquals("10", v.getId());
+  }
+
+  @Test
+  public void testGetLatestVersion() throws Exception {
+    final String url = System.getenv("VRA_URL");
+    if (url == null) {
+      System.err.println("VRA_URL not set. Skipping test");
+      return;
+    }
+    final VraApi client = new VraApi(url, System.getenv("VRA_TOKEN"), true);
+    final CatalogItemVersion v = client.getLatestCatalogItemVersion(catalogItemId);
+    assertNotNull(v);
+    assertEquals("11", v.getId());
   }
 
   @Test
