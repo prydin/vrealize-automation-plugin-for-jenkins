@@ -6,7 +6,3 @@ cache:
 jdk:
   - oraclejdk8
   - openjdk8
-env:
-  global:
-    - VRA_URL=https://api.mgmt.cloud.vmware.com
-    - secure: "vTUDFgyfJpSY4Or+ToBYTu48eEdpKR4LDFRicaxG9TYE6Bgvw/Mc68bwh5cpLvcuFCKDsMavZk03fdfCK/o9hWYzzs/O8rOjBX4tq+RjibsQzRDrjMa9qzQVlxSmIy5/V8VDfIJQCD0hd8iZP5DW1O5Sywb153O+KhdRYqqpoDZkqZ9wpE2xOnpaTdriCzNteUXKyv5yH4u0GrSG8tJ4TB4lBEANo8uj9qKBDFEOqaYkky/Nb7tYXPBXGaRHHf+drMS6j7muYNoylUdCGAwlTyIY0JnuggNkSyhnKNt9OBo3+m3fmdEuwzFrp0P5IyEfZN7tE2vmn0Nt6Pnrk/A5vVj+ss0L8P/VnqpkMBJoe49nfb1znwn3MFDTYrRG61ytg0SUGuO0sNEcMulCaM5GqgW20D9WoovavtzQlgGyXZIokymL8TYwpJjN+YFioCWHz97gyf/OcNKG6AUNcjUVYGDOSHKf4+j2LA05ap1RQrT8bgbWJdsHrsB4qTrYBSllO9nU50guL1iuyag5rRRhZQ8h6MJpA9m/PfdTS4nqShI1msyKHIkB8PYX6VQNhAm9hhF7HV4GHLRpm8Jwfj7D4OQd88D1NZMucHhOA8aNWZ50huj4Mt5OopOLXZcO1COeyXWdovhwnzPWWm5tur5T6joZiaiIBMaCjMs1ZcXFrDM="
